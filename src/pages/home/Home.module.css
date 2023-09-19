@@ -1,0 +1,5 @@
+.container {
+  width: 100vw;
+  min-height: 84vh;
+  border: 1px solid green;
+}

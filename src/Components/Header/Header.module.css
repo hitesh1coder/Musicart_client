@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  background: #2e0052;
+  height: 8vh;
+  color: #fff;
+  font-size: 0.9rem;
+  position: sticky;
+  top: 0;
+}
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contact img {
+  width: 2.5rem;
+}
+.btns {
+  padding: 0 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.btn {
+  color: #fff;
+  cursor: pointer;
+}

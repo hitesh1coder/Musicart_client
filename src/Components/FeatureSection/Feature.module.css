@@ -1,0 +1,52 @@
+.container {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 2.8rem;
+}
+.view_options,
+.filter_options,
+.sort_options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.view_options img {
+  cursor: pointer;
+}
+.select_type {
+  width: 35rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.select_filter,
+.select_sort {
+  border-radius: 34.145px;
+  text-align: center;
+  font-weight: 800;
+  width: 100%;
+  padding: 7px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.select_filter {
+  outline: none;
+  border: none;
+  background: #d9d9d9;
+}
+.select_sort {
+  border: 2px solid #e1e1e1;
+  outline: none;
+}
+.select_filter option,
+.select_sort option {
+  z-index: 2;
+  background: #fff;
+  font-size: 12px;
+  font-weight: 800;
+}
