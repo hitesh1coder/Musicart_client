@@ -1,29 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SignUp.module.css";
 import logo from "../../../images/logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { signupUser } from "../../../redux/Slices/authSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState();
+  const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
-  // const user = useSelector((state) => state.auth.user);
-  // const error = useSelector((state) => state.auth.error);
+  const [isError, setIsError] = useState(false);
+  const user = useSelector((state) => state.auth.user);
+  const loading = useSelector((state) => state.auth.loading);
+  const error = useSelector((state) => state.auth.error);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signupUser({ email, password }));
+    if (!name || !email || !mobile || !password) {
+      setIsError(true);
+    } else {
+      setIsError(false);
+      dispatch(signupUser({ name, email, mobile, password }));
+    }
   };
 
-  // // If the user is authenticated, redirect to home/dashboard page
-  // if (user) {
-  //   navigate.push("/dashboard");
-  // }
+  useEffect(() => {
+    if (error) {
+      alert(error?.message);
+    }
+    if (user) {
+      navigate("/");
+    }
+  }, [user, dispatch]);
 
   return (
     <div className={styles.main_container}>
@@ -47,7 +58,7 @@ function Signup() {
           <input
             type="number"
             value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
+            onChange={(e) => setMobile(Number(e.target.value))}
           />
         </div>
         <div className={styles.input_field}>
@@ -71,15 +82,24 @@ function Signup() {
           automated security notifications via text message from Musicart.
           Message and data rates may apply.
         </p>
-        <button type="submit" className={styles.btn}>
-          Continue
+        {isError && <span>* All fields are required</span>}
+        <button
+          disabled={loading}
+          style={{ pointerEvents: error ? "none" : "" }}
+          onClick={handleSubmit}
+          type="submit"
+          className={styles.btn}
+        >
+          {loading ? "signing up..." : "Continue"}
         </button>
         <p className={styles.warning}>
           By continuing, you agree to Musicart privacy notice and conditions of
           use.
         </p>
       </div>
-      <div>Already have an account? Sign in</div>
+      <div>
+        Already have an account?<Link to="/login">Sign in</Link>
+      </div>
     </div>
   );
 }

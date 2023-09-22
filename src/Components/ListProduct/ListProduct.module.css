@@ -1,7 +1,7 @@
 .productList_container {
   width: 95vw;
   display: flex;
-  height: 18rem;
+
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
@@ -21,7 +21,7 @@
 .productImage {
   width: 82%;
   max-height: 200px;
-  object-fit: cover;
+  object-fit: fill;
   transition: transform 0.3s;
 }
 .productImage:hover {

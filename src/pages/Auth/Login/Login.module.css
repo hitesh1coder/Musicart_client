@@ -20,7 +20,7 @@
   justify-content: center;
   flex-direction: column;
   width: 35vw;
-  height: 50vh;
+  height: 55vh;
   border: 2px solid #d9d9d9;
   border-radius: 0.4rem;
   padding: 1rem 1.4rem;
@@ -46,13 +46,14 @@
   margin-top: 0.4rem;
   font-size: 1rem;
   padding: 0.5rem;
+  cursor: pointer;
 }
 .warning {
   font-size: 0.9rem;
   margin: 0.4rem 0;
 }
 .text {
-  width: 35vw;
+  width: 40vw;
   align-items: center;
   justify-content: center;
   height: 2rem;

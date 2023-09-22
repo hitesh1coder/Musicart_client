@@ -1,19 +1,35 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Cart.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCartItems } from "../../redux/Slices/cartSlice";
+import {
+  fetchCartProducts,
+  getCartTotal,
+  updateCartQuantity,
+} from "../../redux/Slices/cartSlice";
 import Header from "../../Components/Header/Header";
 import Banner from "../../Components/Banner/Banner";
 import { Link } from "react-router-dom";
 
 function Cart() {
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  const [quantity, setQuantity] = useState(1);
-  console.log(cartItems);
+  const { cartItems, totalAmount, totalCount } = useSelector(
+    (state) => state.cart
+  );
+  const { user } = useSelector((state) => state.auth);
+  const userId = user?.userid;
   const dispatch = useDispatch();
 
+  const handleQuantityChange = ({ e, productId }) => {
+    dispatch(getCartTotal());
+    let quantity = parseInt(e.target.value);
+    dispatch(updateCartQuantity({ quantity, productId, userId }));
+  };
+
   useEffect(() => {
-    dispatch(fetchCartItems());
+    dispatch(getCartTotal());
+  }, [cartItems]);
+
+  useEffect(() => {
+    dispatch(fetchCartProducts(userId));
   }, [dispatch]);
 
   return (
@@ -29,47 +45,52 @@ function Cart() {
           <div className={styles.main_container}>
             <div className={styles.cart_container}>
               {cartItems?.map((item) => (
-                <div key={item.id} className={styles.cart_item_container}>
+                <div key={item?._id} className={styles.cart_item_container}>
                   <div className={styles.image_container}>
-                    <img src={item.thumbnail} alt={item.title} />
+                    <img
+                      src={item.images ? item?.images[0] : ""}
+                      alt={item?.title}
+                    />
                   </div>
                   <div className={styles.product_details_container}>
                     <div className={styles.title}>
-                      <h3>{item.title}</h3>
+                      <h3>{item?.title}</h3>
                       <p>Color : Black</p>
                       <p>In Stock</p>
                     </div>
                     <div className={styles.price}>
                       <h3>Price</h3>
-                      <p> ₹ {item.price}</p>
+                      <p> ₹ {item?.price}</p>
                     </div>
                     <div>
                       <h3>Quantity</h3>
                       <select
                         className={styles.select_quantity}
-                        value={quantity}
-                        onChange={(e) => setQuantity(e.target.value)}
+                        value={item?.quantity}
+                        onChange={(e) =>
+                          handleQuantityChange({
+                            e,
+                            productId: item._id,
+                          })
+                        }
                       >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
+                        {[...Array(8)].map((_, index) => (
+                          <option key={index} value={index + 1}>
+                            {index + 1}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <div className={styles.product_total_price}>
                       <h3>Total</h3>
-                      <p> ₹ {item.price * quantity}</p>
+                      <p> ₹ {item?.price * item?.quantity}</p>
                     </div>
                   </div>
                 </div>
               ))}
               <div className={styles.total_products}>
-                <p>1 Item</p>
-                <p> ₹ 3500</p>
+                <p>{totalCount} Item</p>
+                <p> ₹ {totalAmount}</p>
               </div>
             </div>
             <div className={styles.cart_price_details}>
@@ -77,7 +98,7 @@ function Cart() {
               <div className={styles.price_details}>
                 <div className={styles.about_price}>
                   <p>Total MRP</p>
-                  <p> ₹ 3500</p>
+                  <p> ₹ {totalAmount}</p>
                 </div>
                 <div className={styles.about_price}>
                   <p>Discount on MRP MRP</p>
@@ -89,7 +110,7 @@ function Cart() {
                 </div>
                 <div className={styles.cart_grand_total}>
                   <h2>Total Amount -</h2>
-                  <p>₹ 3545</p>
+                  <p>₹ {totalAmount + 45}</p>
                 </div>
                 <Link to="/checkout">
                   <button className={styles.place_order_btn}>

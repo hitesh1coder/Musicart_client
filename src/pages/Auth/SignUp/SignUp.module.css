@@ -17,10 +17,10 @@
 }
 .signup_container {
   display: flex;
-  justify-content: center;
+
   flex-direction: column;
   width: 27rem;
-  height: 80%;
+  height: 83%;
   border: 2px solid #d9d9d9;
   border-radius: 0.4rem;
   padding: 0 1.4rem;
@@ -46,6 +46,7 @@
   margin-top: 0.4rem;
   font-size: 1rem;
   padding: 0.5rem;
+  cursor: pointer;
 }
 .disclamar {
   font-weight: bold;

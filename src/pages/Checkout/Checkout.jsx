@@ -1,17 +1,27 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Checkout.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCartItems } from "../../redux/Slices/cartSlice";
+import { fetchCartProducts, getCartTotal } from "../../redux/Slices/cartSlice";
 import Header from "../../Components/Header/Header";
 import Banner from "../../Components/Banner/Banner";
 import { Link } from "react-router-dom";
 
 function Checkout() {
-  const cartItems = useSelector((state) => state.cart.cartItems);
+  const { cartItems, totalAmount, totalCount } = useSelector(
+    (state) => state.cart
+  );
+
+  const user = useSelector((state) => state.auth.user);
+  const userId = user?.userid;
   const dispatch = useDispatch();
 
+  const cartTotalAmount = totalAmount + 45;
   useEffect(() => {
-    dispatch(fetchCartItems());
+    dispatch(getCartTotal());
+  }, [cartItems]);
+
+  useEffect(() => {
+    dispatch(fetchCartProducts(userId));
   }, [dispatch]);
 
   return (
@@ -45,14 +55,17 @@ function Checkout() {
               <div className={styles.item_review}>
                 <h2>3. Review items and delivery</h2>
 
-                {cartItems.map((item) => (
-                  <div key={item.id} className={styles.cartItems}>
+                {cartItems?.map((product) => (
+                  <div key={product?._id} className={styles.cartItems}>
                     <div className={styles.image_container}>
-                      <img src={item.thumbnail} alt={item.title} />
+                      <img
+                        src={product?.images ? product?.images[0] : ""}
+                        alt={product?.title}
+                      />
                     </div>
                     <div className={styles.product_details_container}>
-                      <h3>{item.title}</h3>
-                      <span>Color : Black</span>
+                      <h3>{product?.title}</h3>
+                      <span>Color : {product?.color}</span>
                       <span>In Stock</span>
                       <p>Estimated delivery : </p>
                       <p>Monday — FREE Standard Delivery</p>
@@ -67,7 +80,7 @@ function Checkout() {
                   </button>
                 </Link>
                 <div>
-                  <h2>Order Total : ₹3545.00</h2>
+                  <h2>Order Total : ₹{cartTotalAmount}.00</h2>
                   <p>
                     By placing your order, you agree to Musicart privacy notice
                     and conditions of use.
@@ -89,7 +102,7 @@ function Checkout() {
                 <p>Order Summery</p>
                 <div className={styles.price}>
                   <p>items: </p>
-                  <p>₹ 3500.00</p>
+                  <p>₹ {cartTotalAmount}.00</p>
                 </div>
                 <div className={styles.price}>
                   <p>Delivery: </p>
@@ -98,7 +111,7 @@ function Checkout() {
               </div>
               <div className={styles.total_order_amount}>
                 <p>Order Total : </p>
-                <p>₹ 3545.00</p>
+                <p>₹ {cartTotalAmount + 45}.00</p>
               </div>
             </div>
           </div>

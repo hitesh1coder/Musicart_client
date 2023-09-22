@@ -1,22 +1,24 @@
 import React from "react";
 import styles from "./Card.module.css";
-import productImg from "../../images/product.jpg";
 import cartIcon from "../../images/icons8-add-shopping-cart-24.png";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/Slices/cartSlice";
 
 const Card = ({ product }) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  const userId = user?.userid;
 
   const handleAddToCart = () => {
-    dispatch(addToCart(product));
+    dispatch(addToCart({ userId, product, quantity: 1 }));
   };
   return (
     <div className={styles.productCard}>
       <div className={styles.product_image_div}>
         <img
-          src={productImg}
+          loading="lazy"
+          src={product.images[0]}
           alt={product.title}
           className={styles.productImage}
         />
@@ -27,13 +29,13 @@ const Card = ({ product }) => {
           alt="cartIcon"
         />
       </div>
-      <Link to={`/${product.id}`}>
+      <Link to={`/${product._id}`}>
         <div className={styles.product_desc}>
           <h2 className={styles.productTitle}>{product.title}</h2>
           <p className={styles.productPrice}> Price : ₹ {product.price}</p>
-          <span>Blue</span>
+          <span>{product?.color}</span>
           <span> | </span>
-          <span>On-ear headphone </span>
+          <span>{product?.type}</span>
         </div>
       </Link>
     </div>

@@ -5,16 +5,15 @@ import { fetchProducts } from "../../redux/Slices/productSlice";
 import axios from "axios";
 import Card from "../ProductCard/Card";
 import ListProduct from "../ListProduct/ListProduct";
+import { productContext } from "../../GlobalContext/GlobalContext";
 
 const AllProducts = () => {
+  const { isListView, setIsListView } = productContext();
   const products = useSelector((state) => state.products.products);
   const status = useSelector((state) => state.products.status);
   const error = useSelector((state) => state.products.error);
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
 
   useEffect(() => {
     if (status === "idle") {
@@ -32,10 +31,17 @@ const AllProducts = () => {
 
   return (
     <div className={styles.container}>
-      {products?.map((product) => (
-        <Card key={product.id} product={product} />
-        // <ListProduct key={product.id} product={product} />
-      ))}
+      {products?.length > 0 ? (
+        products?.map((product) =>
+          isListView ? (
+            <Card key={product._id} product={product} />
+          ) : (
+            <ListProduct key={product._id} product={product} />
+          )
+        )
+      ) : (
+        <h3>No Result Found ...</h3>
+      )}
     </div>
   );
 };

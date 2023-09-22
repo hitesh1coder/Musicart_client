@@ -75,12 +75,11 @@
 }
 
 .total_products {
-  position: absolute;
-  width: 58%;
-  bottom: 4rem;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   right: 6rem;
+  padding-left: 15rem;
 }
 .cart_price_details {
   border-left: 2px solid #e1e1e1;

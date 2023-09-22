@@ -13,6 +13,9 @@
   gap: 1rem;
 }
 .view_options img {
+  width: 1.9rem;
+  padding: 0.5rem;
+  border-radius: 9px;
   cursor: pointer;
 }
 .select_type {

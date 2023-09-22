@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Success.module.css";
 import logo from "../../images/logo.png";
 import success from "../../images/confetti 1.png";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../../redux/Slices/cartSlice";
 
 const Success = () => {
+  const { user } = useSelector((state) => state.auth);
+  const userId = user?.userid;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearCart(userId));
+  }, [dispatch]);
   return (
     <div className={styles.main_container}>
       <div className={styles.logo_container}>

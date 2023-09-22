@@ -23,7 +23,7 @@
 .productImage {
   width: 75%;
   max-height: 180px;
-  object-fit: cover;
+  object-fit: fill;
   transition: transform 0.3s;
 }
 .productImage:hover {
