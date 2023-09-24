@@ -34,7 +34,7 @@ const Banner = ({ pageContent }) => {
           <p> Home / {pageContent}</p>
         </div>
         <div>
-          {checkIsCartPageOrIsCheckoutPage() && (
+          {user && checkIsCartPageOrIsCheckoutPage() && (
             <Link to="/cart">
               <button className={styles.viewCart_btn}>
                 <img src={cartIcon} alt="cartIcon" />

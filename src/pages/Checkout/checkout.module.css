@@ -137,3 +137,45 @@
   display: flex;
   justify-content: space-between;
 }
+
+/*Responcive Code  */
+@media only screen and (max-width: 520px) {
+  .main_container {
+    margin-bottom: 4rem;
+  }
+  .order_details {
+    width: 93%;
+  }
+  .delivery_detail,
+  .payment_details,
+  .item_review {
+    width: 100%;
+    padding: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 2rem;
+  }
+  .cartItems {
+    margin: 0.7rem 0;
+    width: 80%;
+    line-height: 2rem;
+  }
+  .order_confirmation {
+    margin: 0.4rem;
+    border: none;
+    width: 100%;
+    flex-direction: column-reverse;
+  }
+  .back_btn_mobile {
+    margin-left: 1rem;
+    margin-top: 4.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: #fff;
+    box-shadow: 3px 3px 3px #797878;
+    border-radius: 50%;
+  }
+  .place_order_btn {
+    width: 19rem;
+  }
+}

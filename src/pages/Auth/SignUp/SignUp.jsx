@@ -4,6 +4,7 @@ import logo from "../../../images/logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { signupUser } from "../../../redux/Slices/authSlice";
 import { Link, useNavigate } from "react-router-dom";
+import MobileAuthHeader from "../../../MobileComponents/MobileHeader/MobileAuthHeader";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -11,9 +12,8 @@ function Signup() {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [isError, setIsError] = useState(false);
-  const user = useSelector((state) => state.auth.user);
-  const loading = useSelector((state) => state.auth.loading);
-  const error = useSelector((state) => state.auth.error);
+  const { user, loading, error } = useSelector((state) => state.auth);
+  const { isMobile } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,13 +38,20 @@ function Signup() {
 
   return (
     <div className={styles.main_container}>
-      <div className={styles.logo_container}>
-        <img src={logo} alt="logo" />
-        <h2>Musicart</h2>
-      </div>
+      {isMobile && <MobileAuthHeader />}
+      {!isMobile ? (
+        <div className={styles.logo_container}>
+          <img src={logo} alt="logo" />
+          <h2>Musicart</h2>
+        </div>
+      ) : (
+        <p className={styles.mobile_heading}>Welcome</p>
+      )}
       <div className={styles.signup_container}>
-        <h2>Sign In</h2>
-        {/* {error && <div>Error: {error}</div>} */}
+        <div className={styles.signup_header}>
+          <h2>Sign In</h2>
+          {isMobile && <span>Already a customer?</span>}
+        </div>
         <div className={styles.input_field}>
           <label>Your Name</label>
           <input

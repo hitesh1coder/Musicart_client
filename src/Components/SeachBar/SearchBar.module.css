@@ -18,3 +18,18 @@
   position: absolute;
   left: 3rem;
 }
+
+/* Responcive Code  */
+@media only screen and (max-width: 520px) {
+  .container {
+    padding: 0.5rem;
+  }
+  .search_input {
+    width: 100%;
+    border-radius: 5px;
+  }
+  .search_icon {
+    width: 0.3rem;
+    left: 1.8rem;
+  }
+}

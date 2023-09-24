@@ -7,7 +7,7 @@ import { addToCart } from "../../redux/Slices/cartSlice";
 
 const Card = ({ product }) => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
+  const { user } = useSelector((state) => state.auth);
   const userId = user?.userid;
 
   const handleAddToCart = () => {
@@ -22,12 +22,14 @@ const Card = ({ product }) => {
           alt={product.title}
           className={styles.productImage}
         />
-        <img
-          onClick={handleAddToCart}
-          className={styles.cartIcon}
-          src={cartIcon}
-          alt="cartIcon"
-        />
+        {user && (
+          <img
+            onClick={handleAddToCart}
+            className={styles.cartIcon}
+            src={cartIcon}
+            alt="cartIcon"
+          />
+        )}
       </div>
       <Link to={`/${product._id}`}>
         <div className={styles.product_desc}>

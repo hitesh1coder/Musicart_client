@@ -5,7 +5,7 @@ import girl_img from "../../images/image_5-removebg-preview 1.png";
 
 const BannerImage = () => {
   return (
-    <div className={styles.banner}>
+    <div className={styles.banner_Image_container}>
       <img className={styles.background_img} src={banner} alt="banner" />
       <p className={styles.banner_text}>
         Grab upto 50% off on Selected headphones

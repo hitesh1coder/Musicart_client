@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Cart.module.css";
+import backIcon from "../../images/icons8-back-50.png";
+import bagIcon from "../../images/icons8-bag-64.png";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchCartProducts,
@@ -9,11 +11,14 @@ import {
 import Header from "../../Components/Header/Header";
 import Banner from "../../Components/Banner/Banner";
 import { Link } from "react-router-dom";
+import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
+import SeachBarHeader from "../../MobileComponents/MobileHeader/SeachBarHeader";
 
 function Cart() {
   const { cartItems, totalAmount, totalCount } = useSelector(
     (state) => state.cart
   );
+  const { isMobile } = useSelector((state) => state.ui);
   const { user } = useSelector((state) => state.auth);
   const userId = user?.userid;
   const dispatch = useDispatch();
@@ -35,17 +40,32 @@ function Cart() {
   return (
     <>
       <div>
-        <Header />
+        {isMobile ? <SeachBarHeader /> : <Header />}
         <Banner pageContent="ViewCart" />
-        <Link to="/">
-          <button className={styles.back_btn}>Back to products</button>
-        </Link>
-        <h1 className={styles.heading}>My Cart</h1>
+        {isMobile ? (
+          <Link to="/">
+            <img
+              className={styles.back_btn_mobile}
+              src={backIcon}
+              alt="backIcon"
+            />
+          </Link>
+        ) : (
+          <Link to="/">
+            <button className={styles.back_btn}>Back to products</button>
+          </Link>
+        )}
+        {!isMobile && (
+          <div className={styles.cart_heading}>
+            <img src={bagIcon} alt="bagIcon" />
+            <h1>My Cart</h1>
+          </div>
+        )}
         {cartItems && cartItems.length > 0 ? (
           <div className={styles.main_container}>
             <div className={styles.cart_container}>
-              {cartItems?.map((item) => (
-                <div key={item?._id} className={styles.cart_item_container}>
+              {cartItems?.map((item, i) => (
+                <div key={i} className={styles.cart_item_container}>
                   <div className={styles.image_container}>
                     <img
                       src={item.images ? item?.images[0] : ""}
@@ -55,13 +75,16 @@ function Cart() {
                   <div className={styles.product_details_container}>
                     <div className={styles.title}>
                       <h3>{item?.title}</h3>
+                      {isMobile && <h3> ₹ {item?.price}</h3>}
                       <p>Color : Black</p>
                       <p>In Stock</p>
                     </div>
-                    <div className={styles.price}>
-                      <h3>Price</h3>
-                      <p> ₹ {item?.price}</p>
-                    </div>
+                    {!isMobile && (
+                      <div className={styles.price}>
+                        <h3>Price</h3>
+                        <p> ₹ {item?.price}</p>
+                      </div>
+                    )}
                     <div>
                       <h3>Quantity</h3>
                       <select
@@ -82,48 +105,59 @@ function Cart() {
                       </select>
                     </div>
                     <div className={styles.product_total_price}>
-                      <h3>Total</h3>
+                      <h3>Total :</h3>
                       <p> ₹ {item?.price * item?.quantity}</p>
                     </div>
                   </div>
                 </div>
               ))}
+              {isMobile && <hr />}
               <div className={styles.total_products}>
                 <p>{totalCount} Item</p>
                 <p> ₹ {totalAmount}</p>
               </div>
-            </div>
-            <div className={styles.cart_price_details}>
-              <h4>Price Details</h4>
-              <div className={styles.price_details}>
-                <div className={styles.about_price}>
-                  <p>Total MRP</p>
-                  <p> ₹ {totalAmount}</p>
-                </div>
-                <div className={styles.about_price}>
-                  <p>Discount on MRP MRP</p>
-                  <p> ₹ 0</p>
-                </div>
-                <div className={styles.about_price}>
-                  <p>Convenience Fee</p>
-                  <p> ₹ 45</p>
-                </div>
-                <div className={styles.cart_grand_total}>
-                  <h2>Total Amount -</h2>
-                  <p>₹ {totalAmount + 45}</p>
-                </div>
+              {isMobile && (
                 <Link to="/checkout">
                   <button className={styles.place_order_btn}>
                     Place Order
                   </button>
                 </Link>
-              </div>
+              )}
             </div>
+            {!isMobile && (
+              <div className={styles.cart_price_details}>
+                <h4>Price Details</h4>
+                <div className={styles.price_details}>
+                  <div className={styles.about_price}>
+                    <p>Total MRP</p>
+                    <p> ₹ {totalAmount}</p>
+                  </div>
+                  <div className={styles.about_price}>
+                    <p>Discount on MRP MRP</p>
+                    <p> ₹ 0</p>
+                  </div>
+                  <div className={styles.about_price}>
+                    <p>Convenience Fee</p>
+                    <p> ₹ 45</p>
+                  </div>
+                  <div className={styles.cart_grand_total}>
+                    <h2>Total Amount -</h2>
+                    <p>₹ {totalAmount + 45}</p>
+                  </div>
+                  <Link to="/checkout">
+                    <button className={styles.place_order_btn}>
+                      Place Order
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div>cart is empty</div>
         )}
       </div>
+      {isMobile && <MobileFooter />}
     </>
   );
 }

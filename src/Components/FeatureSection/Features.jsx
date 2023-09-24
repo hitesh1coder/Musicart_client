@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import styles from "./Feature.module.css";
 import gridIcon from "../../images/icons8-grid-30.png";
 import listIcon from "../../images/icons8-list-50.png";
-import { productContext } from "../../GlobalContext/GlobalContext";
 import debounce from "../../utils/debounce";
 import { filterProducts, sortProducts } from "../../redux/Slices/productSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const Features = () => {
-  const { isListView, setIsListView } = productContext();
+const Features = ({ isListView, setIsListView }) => {
   const dispatch = useDispatch();
+  const { isMobile } = useSelector((state) => state.ui);
   const [filters, setFilters] = useState({
     type: "",
     brand: "",
@@ -17,6 +16,7 @@ const Features = () => {
     priceRange: "",
   });
   const [sort, setSort] = useState({ sortBy: "title", order: "asc" });
+
   const debouncedFunction = debounce((data) => {
     dispatch(filterProducts(data));
   }, 200);
@@ -54,22 +54,24 @@ const Features = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.view_options}>
-        <img
-          style={{ backgroundColor: isListView ? "#c5c5c5" : "" }}
-          onClick={() => setIsListView(true)}
-          src={gridIcon}
-          alt="gridIcon"
-        />
-        <img
-          onClick={() => setIsListView(false)}
-          style={{
-            backgroundColor: isListView ? "" : "#c5c5c5",
-          }}
-          src={listIcon}
-          alt="listIcon"
-        />
-      </div>
+      {!isMobile && (
+        <div className={styles.view_options}>
+          <img
+            style={{ backgroundColor: isListView ? "" : "#c5c5c5" }}
+            onClick={() => setIsListView(false)}
+            src={gridIcon}
+            alt="gridIcon"
+          />
+          <img
+            style={{
+              backgroundColor: isListView ? "#c5c5c5" : "",
+            }}
+            src={listIcon}
+            alt="listIcon"
+            onClick={() => setIsListView(true)}
+          />
+        </div>
+      )}
       <div className={styles.filters_options}>
         <div className={styles.select_type}>
           <select

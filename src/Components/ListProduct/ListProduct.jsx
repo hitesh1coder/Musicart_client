@@ -23,12 +23,14 @@ const ListProduct = ({ product }) => {
           alt={product?.title}
           className={styles.productImage}
         />
-        <img
-          onClick={handleAddToCart}
-          className={styles.cartIcon}
-          src={cartIcon}
-          alt="cartIcon"
-        />
+        {user && (
+          <img
+            onClick={handleAddToCart}
+            className={styles.cartIcon}
+            src={cartIcon}
+            alt="cartIcon"
+          />
+        )}
       </div>
       <div className={styles.product_desc}>
         <h2 className={styles.productTitle}>{product.title}</h2>

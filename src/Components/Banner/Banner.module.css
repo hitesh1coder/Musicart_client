@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
+  margin-top: 4rem;
 }
 .headSection {
   margin: 1rem 0;
@@ -33,39 +34,67 @@
   cursor: pointer;
   padding: 0.5rem 0.8rem;
 }
-.banner {
+.banner_Image_container {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .background_img {
-  position: relative;
   height: 28vh;
   width: 95vw;
 }
-.girl_img {
-  position: absolute;
-  width: 17rem;
-  top: 6.5rem;
-  right: 3rem;
-}
+
 .banner_text {
   position: absolute;
   color: #2e0052;
   font-weight: 800;
   font-size: 2rem;
-  top: 9rem;
+  top: 1rem;
   left: 5rem;
   width: 20rem;
 }
 .banner_btn {
   position: absolute;
   left: 6rem;
-  top: 15rem;
+  top: 7rem;
   border: none;
   outline: none;
   color: #fff;
   padding: 0.5rem 1rem;
   border-radius: 30px;
   background: #2e0052;
+}
+.girl_img {
+  position: absolute;
+  width: 16.4rem;
+  top: -1rem;
+  right: 3rem;
+}
+/* Responcive Code  */
+@media only screen and (max-width: 600px) {
+  .banner_Image_container {
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+  }
+  .background_img {
+    height: 23vh;
+    width: 96vw;
+  }
+  .banner_text {
+    font-size: 1.4rem;
+    top: 1rem;
+    left: 1rem;
+    width: 80%;
+  }
+  .banner_btn {
+    left: 2rem;
+    top: 5rem;
+    padding: 0.5rem 1.4rem;
+  }
+  .girl_img {
+    width: 15rem;
+
+    right: -2rem;
+  }
 }

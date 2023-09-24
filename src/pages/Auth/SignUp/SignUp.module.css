@@ -17,13 +17,17 @@
 }
 .signup_container {
   display: flex;
-
   flex-direction: column;
   width: 27rem;
-  height: 83%;
+  height: 74vh;
   border: 2px solid #d9d9d9;
   border-radius: 0.4rem;
   padding: 0 1.4rem;
+}
+.signup_header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 .input_field {
   margin: 0.2rem 0;
@@ -55,4 +59,24 @@
 .warning {
   font-size: 0.8rem;
   margin: 0.4rem 0;
+}
+
+/* Responcive Code  */
+@media only screen and (max-width: 520px) {
+  .main_container {
+    gap: 0.3rem;
+    margin-top: 4rem;
+  }
+  .signup_container {
+    width: 90vw;
+    gap: 0rem;
+    height: 75vh;
+  }
+
+  .mobile_heading {
+    font-size: 2rem;
+    text-align: left;
+    width: 90vw;
+    color: #2e0052;
+  }
 }

@@ -1,0 +1,21 @@
+.container {
+  width: 100vw;
+  height: 9vh;
+  padding: 0 1rem;
+  background-color: #2e0052;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+}
+.logo_div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.logo_div h3 {
+  font-size: 1rem;
+}
+.logo_div img {
+  width: 2.5rem;
+}

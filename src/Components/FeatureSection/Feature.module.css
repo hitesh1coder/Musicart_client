@@ -1,5 +1,5 @@
 .container {
-  width: 100vw;
+  min-width: 100vw;
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 2.8rem;
@@ -45,6 +45,7 @@
 .select_sort {
   border: 2px solid #e1e1e1;
   outline: none;
+  padding: 0 0.5rem;
 }
 .select_filter option,
 .select_sort option {
@@ -52,4 +53,26 @@
   background: #fff;
   font-size: 12px;
   font-weight: 800;
+}
+/* Responcive Code  */
+@media only screen and (max-width: 600px) {
+  .container {
+    padding: 0.4rem;
+    flex-direction: row-reverse;
+  }
+  .filters_options {
+    margin: 0 0.5rem;
+    min-width: 67vw;
+    overflow: auto;
+  }
+  .sort_options {
+    width: 13rem;
+  }
+  .select_filter,
+  .select_sort {
+    border-radius: 10px;
+  }
+  .select_sort {
+    padding: 0.3rem;
+  }
 }

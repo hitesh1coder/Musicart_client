@@ -22,7 +22,7 @@
 }
 .productImage {
   width: 75%;
-  max-height: 180px;
+  height: 180px;
   object-fit: fill;
   transition: transform 0.3s;
 }
@@ -54,4 +54,21 @@ a {
 
 .productPrice {
   font-size: 16px;
+}
+
+/* Responcive Code  */
+@media only screen and (max-width: 520px) {
+  .productCard {
+    width: 170px;
+    margin: 0.5rem;
+  }
+  .product_image_div {
+    height: 13rem;
+  }
+  .productImage {
+    height: 170px;
+  }
+  .product_desc {
+    padding: 1px 15px;
+  }
 }

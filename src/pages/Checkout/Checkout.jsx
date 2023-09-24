@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Checkout.module.css";
+import backIcon from "../../images/icons8-back-50.png";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCartProducts, getCartTotal } from "../../redux/Slices/cartSlice";
 import Header from "../../Components/Header/Header";
 import Banner from "../../Components/Banner/Banner";
 import { Link } from "react-router-dom";
+import MobileAuthHeader from "../../MobileComponents/MobileHeader/MobileAuthHeader";
+import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
 
 function Checkout() {
   const { cartItems, totalAmount, totalCount } = useSelector(
     (state) => state.cart
   );
-
-  const user = useSelector((state) => state.auth.user);
+  const { isMobile } = useSelector((state) => state.ui);
+  const { user } = useSelector((state) => state.auth);
   const userId = user?.userid;
   const dispatch = useDispatch();
 
@@ -27,11 +30,21 @@ function Checkout() {
   return (
     <>
       <div>
-        <Header />
-        <Banner pageContent="Checkout" />
-        <Link to="/">
-          <button className={styles.back_btn}>Back to products</button>
-        </Link>
+        {isMobile ? <MobileAuthHeader /> : <Header />}
+        {!isMobile && <Banner pageContent="ViewCart" />}
+        {isMobile ? (
+          <Link to="/">
+            <img
+              className={styles.back_btn_mobile}
+              src={backIcon}
+              alt="backIcon"
+            />
+          </Link>
+        ) : (
+          <Link to="/">
+            <button className={styles.back_btn}>Back to products</button>
+          </Link>
+        )}
         <h1 className={styles.heading}>Checkout</h1>
 
         {cartItems && cartItems.length > 0 ? (
@@ -73,6 +86,7 @@ function Checkout() {
                   </div>
                 ))}
               </div>
+              {isMobile && <hr />}
               <div className={styles.order_confirmation}>
                 <Link to="/order-success">
                   <button className={styles.place_order_btn}>
@@ -81,44 +95,49 @@ function Checkout() {
                 </Link>
                 <div>
                   <h2>Order Total : ₹{cartTotalAmount}.00</h2>
-                  <p>
-                    By placing your order, you agree to Musicart privacy notice
-                    and conditions of use.
-                  </p>
+                  {!isMobile && (
+                    <p>
+                      By placing your order, you agree to Musicart privacy
+                      notice and conditions of use.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
-            <div className={styles.order_Price_details}>
-              <Link to="/order-success">
-                <button className={styles.place_order_btn}>
-                  Place your Order
-                </button>
-              </Link>
-              <p className={styles.terms}>
-                By placing your order, you agree to Musicart privacy notice and
-                conditions of use.
-              </p>
-              <div className={styles.order_summery}>
-                <p>Order Summery</p>
-                <div className={styles.price}>
-                  <p>items: </p>
-                  <p>₹ {cartTotalAmount}.00</p>
+            {!isMobile && (
+              <div className={styles.order_Price_details}>
+                <Link to="/order-success">
+                  <button className={styles.place_order_btn}>
+                    Place your Order
+                  </button>
+                </Link>
+                <p className={styles.terms}>
+                  By placing your order, you agree to Musicart privacy notice
+                  and conditions of use.
+                </p>
+                <div className={styles.order_summery}>
+                  <p>Order Summery</p>
+                  <div className={styles.price}>
+                    <p>items: </p>
+                    <p>₹ {cartTotalAmount}.00</p>
+                  </div>
+                  <div className={styles.price}>
+                    <p>Delivery: </p>
+                    <p>₹ 45</p>
+                  </div>
                 </div>
-                <div className={styles.price}>
-                  <p>Delivery: </p>
-                  <p>₹ 45</p>
+                <div className={styles.total_order_amount}>
+                  <p>Order Total : </p>
+                  <p>₹ {cartTotalAmount + 45}.00</p>
                 </div>
               </div>
-              <div className={styles.total_order_amount}>
-                <p>Order Total : </p>
-                <p>₹ {cartTotalAmount + 45}.00</p>
-              </div>
-            </div>
+            )}
           </div>
         ) : (
           <div>cart is empty</div>
         )}
       </div>
+      {isMobile && <MobileFooter />}
     </>
   );
 }
