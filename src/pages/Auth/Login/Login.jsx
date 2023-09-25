@@ -29,7 +29,6 @@ function Login() {
       setIsError(false);
       dispatch(loginUser({ email, password }));
     }
-    alert(error?.message);
   };
 
   if (user) {

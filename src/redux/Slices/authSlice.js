@@ -1,6 +1,7 @@
 // src/redux/authSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const initialState = {
   user: localStorage.getItem("user")
@@ -20,7 +21,7 @@ export const loginUser = createAsyncThunk(
         `${import.meta.env.VITE_SERVER_HOST}/auth/login`,
         credentials
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response);
@@ -37,7 +38,7 @@ export const signupUser = createAsyncThunk(
         `${import.meta.env.VITE_SERVER_HOST}/auth/signup`,
         credentials
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response);
@@ -65,11 +66,13 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         localStorage.setItem("user", JSON.stringify(action.payload));
+        toast.success("Logged in successfully");
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.status = "failed";
         state.error = action.payload.data;
+        toast.error(`${action.payload.data?.message}`);
       })
       .addCase(signupUser.pending, (state) => {
         state.status = "loading";
@@ -80,11 +83,13 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         localStorage.setItem("user", JSON.stringify(action.payload));
+        toast.success("Signed up successfully");
       })
       .addCase(signupUser.rejected, (state, action) => {
         state.loading = false;
         state.status = "failed";
         state.error = action.payload.data;
+        toast.error(`${action.payload.data?.message}`);
       });
   },
 });

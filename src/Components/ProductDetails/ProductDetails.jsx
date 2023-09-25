@@ -12,15 +12,11 @@ import Header from "../Header/Header";
 import SearchBarHeader from "../../MobileComponents/MobileHeader/SeachBarHeader";
 import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
 import { addToCart } from "../../redux/Slices/cartSlice";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import DetailPageSkeletan from "../LodingSkeletan/ProductDetailSkeletan/DetailPageSkeletan";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -34,6 +30,16 @@ function ProductDetail() {
     (state) => state.singleProduct
   );
 
+  const settings = {
+    arrows: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    centerPadding: "0px",
+  };
+
   useEffect(() => {
     dispatch(fetchSingleProduct(productId));
     return () => {
@@ -42,7 +48,7 @@ function ProductDetail() {
   }, [dispatch, productId]);
   const [displayImageIndex, setDisplayImageIndex] = useState(0);
 
-  if (status === "loading") return <div>Loading...</div>;
+  if (status === "loading") return <DetailPageSkeletan />;
   if (status === "failed") return <div>Error: {error}</div>;
 
   const handleAddToCart = async () => {
@@ -94,24 +100,13 @@ function ProductDetail() {
                   </button>
                 )}
                 {isMobile && (
-                  <div className={styles.mobile_image_container}>
+                  <Slider {...settings}>
                     {product.images.map((image, index) => (
-                      <Swiper
-                        modules={[Navigation, Pagination, Scrollbar, A11y]}
-                        spaceBetween={30}
-                        slidesPerView={1}
-                        navigation
-                        pagination={{ clickable: true }}
-                        scrollbar={{ draggable: true }}
-                      >
-                        <SwiperSlide>
-                          <div className={styles.product_img} key={index}>
-                            <img src={image} alt={product.title} />
-                          </div>
-                        </SwiperSlide>
-                      </Swiper>
+                      <div className={styles.product_img} key={index}>
+                        <img src={image} alt={product.title} />
+                      </div>
                     ))}
-                  </div>
+                  </Slider>
                 )}
                 {!isMobile && (
                   <div className={styles.product_img}>
@@ -188,7 +183,7 @@ function ProductDetail() {
             </div>
           </>
         ) : (
-          <div>Loading...</div>
+          <DetailPageSkeletan />
         )}
       </div>
       {isMobile && <MobileFooter />}

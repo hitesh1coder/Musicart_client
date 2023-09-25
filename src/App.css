@@ -8,8 +8,9 @@
   overflow-x: hidden;
 }
 
-::-webkit-scrollbar:horizontal {
+::-webkit-scrollbar {
   width: 5px;
+  height: 1px;
 }
 
 ::-webkit-scrollbar-track {

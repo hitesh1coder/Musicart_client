@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const initialState = {
   cartItems: [],
@@ -9,13 +10,12 @@ const initialState = {
   totalCount: 0,
 };
 
-// Async thunk to add a product to the cart in the database
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ userId, product, quantity }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_HOST}/products/addtocart`,
+        `${import.meta.env.VITE_SERVER_HOST}/cart/addtocart`,
         { userId, product, quantity }
       );
 
@@ -26,13 +26,12 @@ export const addToCart = createAsyncThunk(
   }
 );
 
-// Async thunk to fetch the cart from the database
 export const fetchCartProducts = createAsyncThunk(
   "cart/fetchCartItems",
   async (userId, { rejectWithValue }) => {
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_SERVER_HOST}/products/cart/${userId}`
+        `${import.meta.env.VITE_SERVER_HOST}/cart/${userId}`
       );
 
       return response.data;
@@ -48,7 +47,7 @@ export const updateCartQuantity = createAsyncThunk(
   async ({ userId, quantity, productId }, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_HOST}/products/cart/update`,
+        `${import.meta.env.VITE_SERVER_HOST}/cart/update`,
         { userId, quantity, productId }
       );
       return response.data;
@@ -65,7 +64,7 @@ export const clearCart = createAsyncThunk(
   async (userId, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_HOST}/products/cart/clear/${userId}`
+        `${import.meta.env.VITE_SERVER_HOST}/cart/clear/${userId}`
       );
       return response.data;
     } catch (err) {
@@ -96,13 +95,14 @@ const cartSlice = createSlice({
         state.status = "loading";
       })
       .addCase(addToCart.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.status = "succeeded";
         state.cartItems = [...state.cartItems, action.payload];
+        toast.success(` Added to cart`);
       })
       .addCase(addToCart.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+        toast.error(` failed to add to cart`);
       })
       .addCase(fetchCartProducts.pending, (state) => {
         state.status = "loading";
@@ -121,10 +121,13 @@ const cartSlice = createSlice({
       .addCase(updateCartQuantity.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.cartItems = action.payload;
+
+        toast.success(`Quantity updated for this product`);
       })
       .addCase(updateCartQuantity.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+        toast.error(`Failed to updated the Quantity`);
       })
       .addCase(clearCart.pending, (state) => {
         state.status = "loading";
@@ -132,6 +135,7 @@ const cartSlice = createSlice({
       .addCase(clearCart.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.cartItems = [];
+        toast.success(`Congratulations! Your Order has been placed`);
       })
       .addCase(clearCart.rejected, (state, action) => {
         state.status = "failed";

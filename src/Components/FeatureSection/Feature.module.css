@@ -45,7 +45,7 @@
 .select_sort {
   border: 2px solid #e1e1e1;
   outline: none;
-  padding: 0 0.5rem;
+  padding: 0.5rem;
 }
 .select_filter option,
 .select_sort option {

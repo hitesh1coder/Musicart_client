@@ -49,7 +49,7 @@ function Signup() {
       )}
       <div className={styles.signup_container}>
         <div className={styles.signup_header}>
-          <h2>Sign In</h2>
+          <h2>Create Account</h2>
           {isMobile && <span>Already a customer?</span>}
         </div>
         <div className={styles.input_field}>

@@ -4,9 +4,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 .search_input {
-  position: relative;
   width: 95%;
   padding: 0.6rem 2.3rem;
   border-radius: 48px;
@@ -16,7 +16,7 @@
 }
 .search_icon {
   position: absolute;
-  left: 3rem;
+  left: 3.5rem;
 }
 
 /* Responcive Code  */
@@ -30,6 +30,6 @@
   }
   .search_icon {
     width: 0.3rem;
-    left: 1.8rem;
+    left: 0.5rem;
   }
 }

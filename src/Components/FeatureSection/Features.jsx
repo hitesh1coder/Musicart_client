@@ -48,9 +48,10 @@ const Features = ({ isListView, setIsListView }) => {
         newConfig = { sortBy: "title", order: "asc" };
     }
 
-    setSort(newConfig);
+    setSort(e.target.value);
     dispatch(sortProducts(newConfig));
   };
+  console.log(sort);
 
   return (
     <div className={styles.container}>
@@ -92,11 +93,11 @@ const Features = ({ isListView, setIsListView }) => {
             onChange={handleFilterChange}
           >
             <option value="">Company</option>
-            <option value="jbl">Jbl</option>
-            <option value="sony">Sony</option>
+            <option value="JBL">Jbl</option>
+            <option value="SONY">Sony</option>
             <option value="boat">Boat</option>
-            <option value="zebronics">Zebronics</option>
-            <option value="marshall">Marshall</option>
+            <option value="ZEBRONICS">ZEBRONICS</option>
+            <option value="Marshall">Marshall</option>
             <option value="ptron">Ptron</option>
           </select>
           <select
@@ -128,7 +129,7 @@ const Features = ({ isListView, setIsListView }) => {
       <div className={styles.sort_options}>
         <select
           className={styles.select_sort}
-          value={`${sort.sortBy}-${sort.order}`}
+          value={sort}
           onChange={handleSortChange}
         >
           <option value="">Sort by : Featured</option>

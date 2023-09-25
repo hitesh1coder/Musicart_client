@@ -33,7 +33,6 @@ export const searchProducts = createAsyncThunk(
 export const filterProducts = createAsyncThunk(
   "filter/filterProducts",
   async (filters, { rejectWithValue }) => {
-    console.log(filters);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_SERVER_HOST}/products/api/filter`,
@@ -50,13 +49,12 @@ export const filterProducts = createAsyncThunk(
 export const sortProducts = createAsyncThunk(
   "sort/sortProducts",
   async (sortby, { rejectWithValue }) => {
-    console.log(sortby);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_SERVER_HOST}/products/api/sort`,
         { params: sortby }
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response);

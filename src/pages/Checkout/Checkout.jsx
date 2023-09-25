@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Checkout.module.css";
+import styles from "./checkout.module.css";
 import backIcon from "../../images/icons8-back-50.png";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCartProducts, getCartTotal } from "../../redux/Slices/cartSlice";

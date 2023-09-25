@@ -11,6 +11,8 @@ import Checkout from "./pages/Checkout/Checkout";
 import Success from "./pages/OrderSucces/Success";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsMobile } from "./redux/Slices/UiSlice";
+import { ToastContainer, Zoom } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,6 +32,11 @@ const App = () => {
   }, [dispatch]);
   return (
     <Router>
+      <ToastContainer
+        transition={Zoom}
+        position="top-center"
+        autoClose={3000}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />

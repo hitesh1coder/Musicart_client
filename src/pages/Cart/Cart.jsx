@@ -18,6 +18,7 @@ function Cart() {
   const { cartItems, totalAmount, totalCount } = useSelector(
     (state) => state.cart
   );
+
   const { isMobile } = useSelector((state) => state.ui);
   const { user } = useSelector((state) => state.auth);
   const userId = user?.userid;
@@ -41,7 +42,7 @@ function Cart() {
     <>
       <div>
         {isMobile ? <SeachBarHeader /> : <Header />}
-        <Banner pageContent="ViewCart" />
+        {!isMobile && <Banner pageContent="ViewCart" />}
         {isMobile ? (
           <Link to="/">
             <img
@@ -154,7 +155,7 @@ function Cart() {
             )}
           </div>
         ) : (
-          <div>cart is empty</div>
+          <div className={styles.cart_empty_container}>Your cart is empty</div>
         )}
       </div>
       {isMobile && <MobileFooter />}

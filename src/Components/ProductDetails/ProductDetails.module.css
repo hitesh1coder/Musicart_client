@@ -144,13 +144,11 @@
     box-shadow: 3px 3px 3px #797878;
     border-radius: 50%;
   }
-  .product_container {
-    /* width: 95vw; */
-  }
+
   .product_details {
     margin: 1rem 0;
     flex-direction: column;
-    width: 100%;
+    overflow: hidden;
   }
   .buy_btn,
   .cart_btn {
@@ -162,8 +160,11 @@
     border-radius: 7px;
   }
   .product_img {
-    width: 19rem;
-    height: 19rem;
+    height: 46vh;
+    /* margin: 0 0.7rem; */
+  }
+  .product_img img {
+    width: 100%;
   }
   .product_desc {
     width: 98%;
@@ -176,10 +177,59 @@
   .product_btns {
     width: 98%;
   }
-  .mobile_image_container {
-    overflow-x: scroll;
-    width: 100vw;
-    display: flex;
-    gap: 1rem;
+
+  .slick_dots {
+    /* position: absolute; */
+    bottom: -19px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+  }
+  .slick_dots li {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+  }
+  .slick_dots li button {
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    margin: 0 0.3rem;
+    padding: 5px;
+    cursor: pointer;
+    color: transparent;
+    border: 0;
+    outline: none;
+    background: #fffbfb;
+  }
+
+  .slick_dots li.slick-active button:before {
+    opacity: 0.75;
+  }
+  .slick_dots li button:before {
+    font-family: "slick";
+    font-size: 6px;
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    content: "•";
+    text-align: center;
+    opacity: 0.25;
+    color: black;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }

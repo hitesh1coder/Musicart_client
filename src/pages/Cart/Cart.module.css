@@ -120,7 +120,14 @@
   background: #ffd600;
   cursor: pointer;
 }
-
+.cart_empty_container {
+  font-size: 1.4rem;
+  min-height: 53.5vh;
+  width: 100%;
+  padding: 5rem 0;
+  font-weight: bolder;
+  text-align: center;
+}
 /*Responcive Code  */
 @media only screen and (max-width: 520px) {
   .main_container {
@@ -145,6 +152,7 @@
     background: #fff;
     box-shadow: 3px 3px 3px #797878;
     border-radius: 50%;
+    margin-top: 4rem;
   }
   .image_container {
     border: none;
