@@ -9,6 +9,7 @@ import ListSkeletan from "../LodingSkeletan/ListSkeletan/ListSkeletan";
 
 const AllProducts = ({ isListView }) => {
   const { products, status, error } = useSelector((state) => state.products);
+  const { isMobile } = useSelector((state) => state.ui);
 
   const dispatch = useDispatch();
 
@@ -38,7 +39,7 @@ const AllProducts = ({ isListView }) => {
     <div className={styles.container}>
       {products?.length > 0 ? (
         products?.map((product) =>
-          isListView ? (
+          isListView && !isMobile ? (
             <ListProduct key={product._id} product={product} />
           ) : (
             <Card key={product._id} product={product} />

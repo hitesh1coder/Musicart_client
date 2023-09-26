@@ -18,10 +18,10 @@ export const addToCart = createAsyncThunk(
         `${import.meta.env.VITE_SERVER_HOST}/cart/addtocart`,
         { userId, product, quantity }
       );
-
+      console.log(response);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response);
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -101,8 +101,8 @@ const cartSlice = createSlice({
       })
       .addCase(addToCart.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message;
-        toast.error(` failed to add to cart`);
+        state.error = action.payload;
+        toast.error(`${action.payload.message}`);
       })
       .addCase(fetchCartProducts.pending, (state) => {
         state.status = "loading";

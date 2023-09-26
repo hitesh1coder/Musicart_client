@@ -81,12 +81,12 @@ const Features = ({ isListView, setIsListView }) => {
             onChange={handleFilterChange}
           >
             <option value="">Company</option>
-            <option value="JBL">Jbl</option>
-            <option value="SONY">Sony</option>
-            <option value="boat">Boat</option>
+            <option value="JBL">JBL</option>
+            <option value="SONY">SONY</option>
+            <option value="boAt">boAt</option>
             <option value="ZEBRONICS">ZEBRONICS</option>
             <option value="Marshall">Marshall</option>
-            <option value="ptron">Ptron</option>
+            <option value="PTron">PTron</option>
           </select>
           <select
             className={styles.select_filter}

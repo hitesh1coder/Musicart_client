@@ -3,12 +3,11 @@
   margin: 1rem;
   border-radius: 5px;
   padding: 0.2rem;
-  border: 2px solid #eee;
+
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .product_image_div {
   width: 100%;
-  border: 1px solid #e6e2e2;
 }
 .product_desc {
   display: flex;

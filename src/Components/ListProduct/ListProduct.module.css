@@ -20,13 +20,10 @@
 }
 .productImage {
   width: 82%;
-  max-height: 200px;
+  max-height: 260px;
   object-fit: fill;
-  transition: transform 0.3s;
 }
-.productImage:hover {
-  transform: scale(1.02);
-}
+
 .cartIcon {
   position: absolute;
   right: 1rem;

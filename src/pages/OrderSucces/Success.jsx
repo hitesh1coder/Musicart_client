@@ -6,6 +6,7 @@ import success from "../../images/confetti 1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../redux/Slices/cartSlice";
 import MobileAuthHeader from "../../MobileComponents/MobileHeader/MobileAuthHeader";
+import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
 
 const Success = () => {
   const { user } = useSelector((state) => state.auth);
@@ -33,6 +34,7 @@ const Success = () => {
         <Link to="/">
           <button className={styles.back_btn}>Go Back to Homepage</button>
         </Link>
+        {isMobile && <MobileFooter />}
       </div>
     </div>
   );
