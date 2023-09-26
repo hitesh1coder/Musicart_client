@@ -135,7 +135,7 @@
 /* Responcive Code  */
 @media only screen and (max-width: 520px) {
   .container {
-    margin: 4rem 0;
+    margin: 5rem 0;
   }
   .back_btn_mobile {
     width: 2.5rem;
@@ -161,7 +161,6 @@
   }
   .product_img {
     height: 46vh;
-    /* margin: 0 0.7rem; */
   }
   .product_img img {
     width: 100%;
@@ -176,60 +175,5 @@
   }
   .product_btns {
     width: 98%;
-  }
-
-  .slick_dots {
-    /* position: absolute; */
-    bottom: -19px;
-    display: block;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    text-align: center;
-  }
-  .slick_dots li {
-    position: relative;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin: 0 5px;
-    padding: 0;
-    cursor: pointer;
-  }
-  .slick_dots li button {
-    font-size: 0;
-    line-height: 0;
-    display: block;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    margin: 0 0.3rem;
-    padding: 5px;
-    cursor: pointer;
-    color: transparent;
-    border: 0;
-    outline: none;
-    background: #fffbfb;
-  }
-
-  .slick_dots li.slick-active button:before {
-    opacity: 0.75;
-  }
-  .slick_dots li button:before {
-    font-family: "slick";
-    font-size: 6px;
-    line-height: 20px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    content: "•";
-    text-align: center;
-    opacity: 0.25;
-    color: black;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 }

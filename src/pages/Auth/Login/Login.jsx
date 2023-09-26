@@ -10,7 +10,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isError, setIsError] = useState(false);
-  const { user, loading, error } = useSelector((state) => state.auth);
+  const { user, loading } = useSelector((state) => state.auth);
   const { isMobile } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,10 +30,6 @@ function Login() {
       dispatch(loginUser({ email, password }));
     }
   };
-
-  if (user) {
-    navigate("/");
-  }
 
   return (
     <div className={styles.main_container}>

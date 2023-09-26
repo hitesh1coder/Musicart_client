@@ -74,7 +74,7 @@
 /* Responcive Code  */
 @media only screen and (max-width: 600px) {
   .banner_Image_container {
-    margin-top: 5rem;
+    margin-top: 6rem;
     margin-bottom: 1rem;
   }
   .background_img {
@@ -83,18 +83,17 @@
   }
   .banner_text {
     font-size: 1.4rem;
-    top: 1rem;
+    top: 2rem;
     left: 1rem;
-    width: 80%;
+    width: 72%;
   }
   .banner_btn {
     left: 2rem;
-    top: 5rem;
+    top: 7rem;
     padding: 0.5rem 1.4rem;
   }
   .girl_img {
-    width: 15rem;
-
+    width: 20rem;
     right: -2rem;
   }
 }

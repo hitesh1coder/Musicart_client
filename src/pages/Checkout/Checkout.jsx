@@ -69,24 +69,25 @@ function Checkout() {
               </div>
               <div className={styles.item_review}>
                 <h2>3. Review items and delivery</h2>
-
-                {cartItems?.map((product) => (
-                  <div key={product?._id} className={styles.cartItems}>
-                    <div className={styles.image_container}>
-                      <img
-                        src={product?.images ? product?.images[0] : ""}
-                        alt={product?.title}
-                      />
+                <div className={styles.items_container}>
+                  {cartItems?.map((product) => (
+                    <div key={product?._id} className={styles.cartItems}>
+                      <div className={styles.image_container}>
+                        <img
+                          src={product?.images ? product?.images[0] : ""}
+                          alt={product?.title}
+                        />
+                      </div>
+                      <div className={styles.product_details_container}>
+                        <h3>{product?.title}</h3>
+                        <span>Color : {product?.color}</span>
+                        <span>In Stock</span>
+                        <p>Estimated delivery : </p>
+                        <p>Monday — FREE Standard Delivery</p>
+                      </div>
                     </div>
-                    <div className={styles.product_details_container}>
-                      <h3>{product?.title}</h3>
-                      <span>Color : {product?.color}</span>
-                      <span>In Stock</span>
-                      <p>Estimated delivery : </p>
-                      <p>Monday — FREE Standard Delivery</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
               {isMobile && <hr />}
               <div className={styles.order_confirmation}>

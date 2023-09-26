@@ -131,7 +131,7 @@
 /*Responcive Code  */
 @media only screen and (max-width: 520px) {
   .main_container {
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
   }
   .cart_container {
     width: 97vw;
@@ -152,7 +152,7 @@
     background: #fff;
     box-shadow: 3px 3px 3px #797878;
     border-radius: 50%;
-    margin-top: 4rem;
+    margin-top: 5rem;
   }
   .image_container {
     border: none;

@@ -75,7 +75,7 @@ const MobileFooter = () => {
                 : "Are you sure you want to login?",
               icon: "warning",
               showCancelButton: true,
-              confirmButtonColor: "#3085d6",
+              confirmButtonColor: "#2fca08",
               cancelButtonColor: "#d33",
               confirmButtonText: user ? "Yes, Logout!" : "Yes, Login!",
             }).then((result) => {

@@ -12,6 +12,7 @@ import Header from "../Header/Header";
 import SearchBarHeader from "../../MobileComponents/MobileHeader/SeachBarHeader";
 import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
 import { addToCart } from "../../redux/Slices/cartSlice";
+import Swal from "sweetalert2";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -30,9 +31,8 @@ function ProductDetail() {
     (state) => state.singleProduct
   );
 
-  const settings = {
+  const slideSettings = {
     arrows: false,
-    infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -56,15 +56,13 @@ function ProductDetail() {
       await dispatch(addToCart({ userId, product }));
       navigate("/cart");
     } else {
+      Swal.fire({
+        icon: "error",
+        title: "You are not logged in!",
+        text: "Please login first!",
+      });
       navigate("/login");
     }
-  };
-  const SlideSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
   };
 
   return (
@@ -100,7 +98,7 @@ function ProductDetail() {
                   </button>
                 )}
                 {isMobile && (
-                  <Slider {...settings}>
+                  <Slider {...slideSettings}>
                     {product.images.map((image, index) => (
                       <div className={styles.product_img} key={index}>
                         <img src={image} alt={product.title} />
