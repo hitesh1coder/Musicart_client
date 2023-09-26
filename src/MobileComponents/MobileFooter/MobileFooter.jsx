@@ -24,7 +24,12 @@ const MobileFooter = () => {
     if (user) {
       navigate("/cart");
     } else {
-      alert("please Login first");
+      Swal.fire({
+        icon: "error",
+        title: "You are not logged in!",
+        text: "Please login first!",
+      });
+      navigate("/login");
     }
   };
 
