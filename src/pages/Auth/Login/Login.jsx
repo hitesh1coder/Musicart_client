@@ -67,7 +67,9 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        {isError && <span>* All fields are required</span>}
+        {isError && (
+          <span className={styles.error}>* All fields are required</span>
+        )}
         <button
           style={{ pointerEvents: loading ? "none" : "" }}
           onClick={handleSubmit}

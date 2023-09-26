@@ -1,13 +1,16 @@
 import React from "react";
 import styles from "./Header.module.css";
 import phoneIcon from "../../images/icons8-phone-80.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/Slices/authSlice";
+
+import Swal from "sweetalert2";
 
 const Header = () => {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <header className={styles.container}>
       <div className={styles.contact}>
@@ -22,11 +25,28 @@ const Header = () => {
       {user ? (
         <div className={styles.btns}>
           <p>Welcome {user.name}</p>
-          <Link to="/login">
-            <p onClick={() => dispatch(logoutUser())} className={styles.btn}>
-              Logout
-            </p>
-          </Link>
+
+          <p
+            className={styles.btn}
+            onClick={() => {
+              Swal.fire({
+                title: "Are you sure you want to logout?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Logout!",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  dispatch(logoutUser());
+
+                  navigate("/login");
+                }
+              });
+            }}
+          >
+            Logout
+          </p>
         </div>
       ) : (
         <div className={styles.btns}>

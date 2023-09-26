@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styles from "./Feature.module.css";
-import gridIcon from "../../images/icons8-grid-30.png";
-import listIcon from "../../images/icons8-list-50.png";
+import gridIcon from "../../images/icons8-grid-50.png";
+import gridIcon2 from "../../images/icons8-grid-30.png";
+import listIcon from "../../images/icons8-list-100.png";
+import listIcon2 from "../../images/icons8-list-64.png";
 import debounce from "../../utils/debounce";
 import { filterProducts, sortProducts } from "../../redux/Slices/productSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,59 +17,45 @@ const Features = ({ isListView, setIsListView }) => {
     color: "",
     priceRange: "",
   });
-  const [sort, setSort] = useState({ sortBy: "title", order: "asc" });
 
+  const [sort, setSort] = useState({ sortBy: "title", order: "asc" });
   const debouncedFunction = debounce((data) => {
     dispatch(filterProducts(data));
   }, 200);
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prev) => ({ ...prev, [name]: value }));
-    const newFilters = { ...filters, [name]: value };
-    debouncedFunction(newFilters);
+  const handleFilterChange = (event) => {
+    const { name, value } = event.target;
+    setFilters((prevFilters) => ({ ...prevFilters, [name]: value }));
+    const updatedFilters = { ...filters, [name]: value };
+    debouncedFunction(updatedFilters);
   };
   const handleSortChange = (e) => {
     const value = e.target.value;
 
-    let newConfig;
-    switch (value) {
-      case "price-lowest":
-        newConfig = { sortBy: "price", order: "asc" };
-        break;
-      case "price-highest":
-        newConfig = { sortBy: "price", order: "desc" };
-        break;
-      case "title-a-z":
-        newConfig = { sortBy: "title", order: "asc" };
-        break;
-      case "title-z-a":
-        newConfig = { sortBy: "title", order: "desc" };
-        break;
-      default:
-        newConfig = { sortBy: "title", order: "asc" };
-    }
+    const sortOptions = {
+      "price-lowest": { sortBy: "price", order: "asc" },
+      "price-highest": { sortBy: "price", order: "desc" },
+      "title-a-z": { sortBy: "title", order: "asc" },
+      "title-z-a": { sortBy: "title", order: "desc" },
+    };
 
-    setSort(e.target.value);
+    const newConfig = sortOptions[value] || { sortBy: "title", order: "asc" };
+
+    setSort(value);
     dispatch(sortProducts(newConfig));
   };
-  console.log(sort);
 
   return (
     <div className={styles.container}>
       {!isMobile && (
         <div className={styles.view_options}>
           <img
-            style={{ backgroundColor: isListView ? "" : "#c5c5c5" }}
             onClick={() => setIsListView(false)}
-            src={gridIcon}
+            src={isListView ? gridIcon : gridIcon2}
             alt="gridIcon"
           />
           <img
-            style={{
-              backgroundColor: isListView ? "#c5c5c5" : "",
-            }}
-            src={listIcon}
+            src={isListView ? listIcon2 : listIcon}
             alt="listIcon"
             onClick={() => setIsListView(true)}
           />

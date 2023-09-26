@@ -3,9 +3,10 @@ import styles from "./checkout.module.css";
 import backIcon from "../../images/icons8-back-50.png";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCartProducts, getCartTotal } from "../../redux/Slices/cartSlice";
+import Swal from "sweetalert2";
 import Header from "../../Components/Header/Header";
 import Banner from "../../Components/Banner/Banner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MobileAuthHeader from "../../MobileComponents/MobileHeader/MobileAuthHeader";
 import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
 
@@ -17,6 +18,7 @@ function Checkout() {
   const { user } = useSelector((state) => state.auth);
   const userId = user?.userid;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const cartTotalAmount = totalAmount + 45;
   useEffect(() => {
@@ -88,11 +90,26 @@ function Checkout() {
               </div>
               {isMobile && <hr />}
               <div className={styles.order_confirmation}>
-                <Link to="/order-success">
-                  <button className={styles.place_order_btn}>
-                    Place Your Order
-                  </button>
-                </Link>
+                <button
+                  onClick={() => {
+                    Swal.fire({
+                      title: "Are you sure you want to Place Your Order?",
+                      icon: "warning",
+                      showCancelButton: true,
+                      confirmButtonColor: "#2fca08",
+                      cancelButtonColor: "#d33",
+                      confirmButtonText: "Yes, Go Ahead!",
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        navigate("/order-success");
+                      }
+                    });
+                  }}
+                  className={styles.place_order_btn}
+                >
+                  Place Your Order
+                </button>
+
                 <div>
                   <h2>Order Total : ₹{cartTotalAmount}.00</h2>
                   {!isMobile && (
@@ -106,11 +123,26 @@ function Checkout() {
             </div>
             {!isMobile && (
               <div className={styles.order_Price_details}>
-                <Link to="/order-success">
-                  <button className={styles.place_order_btn}>
-                    Place your Order
-                  </button>
-                </Link>
+                <button
+                  onClick={() => {
+                    Swal.fire({
+                      title: "Are you sure you want to Place Your Order?",
+                      icon: "warning",
+                      showCancelButton: true,
+                      confirmButtonColor: "#2fca08",
+                      cancelButtonColor: "#d33",
+                      confirmButtonText: "Yes, Go Ahead!",
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        navigate("/order-success");
+                      }
+                    });
+                  }}
+                  className={styles.place_order_btn}
+                >
+                  Place your Order
+                </button>
+
                 <p className={styles.terms}>
                   By placing your order, you agree to Musicart privacy notice
                   and conditions of use.

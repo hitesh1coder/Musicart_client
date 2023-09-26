@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const MobileAuthHeader = () => {
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.header_container}>
         <div className={styles.logo_div}>
           <img src={logo} alt="logo" />
           <h3>Musicart</h3>

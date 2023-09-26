@@ -89,7 +89,9 @@ function Signup() {
           automated security notifications via text message from Musicart.
           Message and data rates may apply.
         </p>
-        {isError && <span>* All fields are required</span>}
+        {isError && (
+          <span className={styles.error}>* All fields are required</span>
+        )}
         <button
           disabled={loading}
           style={{ pointerEvents: error ? "none" : "" }}

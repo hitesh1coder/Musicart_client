@@ -7,6 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/Slices/authSlice";
 
+import Swal from "sweetalert2";
+
 const MobileFooter = () => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -52,27 +54,39 @@ const MobileFooter = () => {
         <p>Cart</p>
       </div>
 
-      <Link to="/login">
-        <div
+      <div
+        onClick={() => {
+          handleMenulick("user");
+        }}
+        className={`${styles.btn} ${
+          activeMenu === "user" ? `${styles.active}` : ""
+        }`}
+      >
+        <img
           onClick={() => {
-            handleMenulick("user");
-          }}
-          className={`${styles.btn} ${
-            activeMenu === "user" ? `${styles.active}` : ""
-          }`}
-        >
-          <img
-            onClick={() => {
-              dispatch(logoutUser());
+            Swal.fire({
+              title: user
+                ? "Are you sure you want to logout?"
+                : "Are you sure you want to login?",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: user ? "Yes, Logout!" : "Yes, Login!",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                user ? dispatch(logoutUser()) : "";
 
+                navigate("/login");
+              }
               handleMenulick("user");
-            }}
-            src={userIcon}
-            alt="userIcon"
-          />
-          {user ? <p>Logout</p> : <p>Login</p>}
-        </div>
-      </Link>
+            });
+          }}
+          src={userIcon}
+          alt="userIcon"
+        />
+        {user ? <p>Logout</p> : <p>Login</p>}
+      </div>
     </div>
   );
 };
