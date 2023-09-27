@@ -10,7 +10,7 @@ import {
 } from "../../redux/Slices/cartSlice";
 import Header from "../../Components/Header/Header";
 import Banner from "../../Components/Banner/Banner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
 import SeachBarHeader from "../../MobileComponents/MobileHeader/SeachBarHeader";
 
@@ -23,6 +23,7 @@ function Cart() {
   const { user } = useSelector((state) => state.auth);
   const userId = user?.userid;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleQuantityChange = ({ e, productId }) => {
     dispatch(getCartTotal());
@@ -44,17 +45,16 @@ function Cart() {
         {isMobile ? <SeachBarHeader /> : <Header />}
         {!isMobile && <Banner pageContent="ViewCart" />}
         {isMobile ? (
-          <Link to="/">
-            <img
-              className={styles.back_btn_mobile}
-              src={backIcon}
-              alt="backIcon"
-            />
-          </Link>
+          <img
+            onClick={() => navigate(-1)}
+            className={styles.back_btn_mobile}
+            src={backIcon}
+            alt="backIcon"
+          />
         ) : (
-          <Link to="/">
-            <button className={styles.back_btn}>Back to products</button>
-          </Link>
+          <button onClick={() => navigate(-1)} className={styles.back_btn}>
+            Back to products
+          </button>
         )}
         {!isMobile && (
           <div className={styles.cart_heading}>

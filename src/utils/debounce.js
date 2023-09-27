@@ -1,5 +1,3 @@
-// utils/debounce.js
-
 export default function debounce(func, delay) {
   let inDebounce;
 

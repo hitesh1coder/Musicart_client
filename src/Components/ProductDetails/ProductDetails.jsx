@@ -13,7 +13,6 @@ import SearchBarHeader from "../../MobileComponents/MobileHeader/SeachBarHeader"
 import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
 import { addToCart } from "../../redux/Slices/cartSlice";
 import Swal from "sweetalert2";
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -71,17 +70,16 @@ function ProductDetail() {
       {!isMobile && <Banner pageContent={product?.title} />}
       <div div className={styles.container}>
         {isMobile ? (
-          <Link to="/">
-            <img
-              className={styles.back_btn_mobile}
-              src={backIcon}
-              alt="backIcon"
-            />
-          </Link>
+          <img
+            onClick={() => navigate(-1)}
+            className={styles.back_btn_mobile}
+            src={backIcon}
+            alt="backIcon"
+          />
         ) : (
-          <Link to="/">
-            <button className={styles.back_btn}>Back to products</button>
-          </Link>
+          <button onClick={() => navigate(-1)} className={styles.back_btn}>
+            Back to products
+          </button>
         )}
         {product ? (
           <>

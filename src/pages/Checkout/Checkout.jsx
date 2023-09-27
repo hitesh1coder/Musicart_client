@@ -35,17 +35,16 @@ function Checkout() {
         {isMobile ? <MobileAuthHeader /> : <Header />}
         {!isMobile && <Banner pageContent="ViewCart" />}
         {isMobile ? (
-          <Link to="/">
-            <img
-              className={styles.back_btn_mobile}
-              src={backIcon}
-              alt="backIcon"
-            />
-          </Link>
+          <img
+            onClick={() => navigate(-1)}
+            className={styles.back_btn_mobile}
+            src={backIcon}
+            alt="backIcon"
+          />
         ) : (
-          <Link to="/">
-            <button className={styles.back_btn}>Back to products</button>
-          </Link>
+          <button onClick={() => navigate(-1)} className={styles.back_btn}>
+            Back to products
+          </button>
         )}
         <h1 className={styles.heading}>Checkout</h1>
 
