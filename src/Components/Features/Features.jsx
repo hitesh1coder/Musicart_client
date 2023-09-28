@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import styles from "./Feature.module.css";
-import gridIcon from "../../images/icons8-grid-50.png";
-import gridIcon2 from "../../images/icons8-grid-30.png";
-import listIcon from "../../images/icons8-list-100.png";
-import listIcon2 from "../../images/icons8-list-64.png";
-import debounce from "../../utils/debounce";
-import { filterProducts, sortProducts } from "../../redux/Slices/productSlice";
 import { useDispatch, useSelector } from "react-redux";
+import styles from "./Feature.module.css";
+
+import { filterProducts, sortProducts } from "../../redux/Slices/productSlice";
+import debounce from "../../utils/debounce";
+
+import gridIcon from "/images/icons8-grid-50.png";
+import gridIcon2 from "/images/icons8-grid-30.png";
+import listIcon from "/images/icons8-list-100.png";
+import listIcon2 from "/images/icons8-list-64.png";
 
 const Features = ({ isListView, setIsListView }) => {
   const dispatch = useDispatch();

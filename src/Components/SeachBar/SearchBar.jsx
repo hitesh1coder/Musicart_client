@@ -1,9 +1,10 @@
 import React from "react";
-import styles from "./SearchBar.module.css";
-import searchIcon from "../../images/icons8-search-30.png";
 import { useDispatch } from "react-redux";
+
+import styles from "./SearchBar.module.css";
 import { searchProducts } from "../../redux/Slices/productSlice";
 import debounce from "../../utils/debounce";
+import searchIcon from "/images/icons8-search-30.png";
 
 const SearchBar = () => {
   const dispatch = useDispatch();

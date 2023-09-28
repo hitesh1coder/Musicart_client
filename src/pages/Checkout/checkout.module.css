@@ -54,6 +54,7 @@
 .cartItems {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
   width: 50%;
   margin: 0.5rem 0;

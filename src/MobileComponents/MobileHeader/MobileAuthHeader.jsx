@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./MobileHeader.module.css";
-import logo from "../../images/logo.png";
-import { useSelector } from "react-redux";
+import logo from "/images/logo.png";
+
 const MobileAuthHeader = () => {
   return (
     <>

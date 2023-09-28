@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
-import styles from "./Banner.module.css";
-import logo from "../../images/logo.png";
-
-import cartIcon from "../../images/icons8-cart-24.png";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import styles from "./Banner.module.css";
+
+import cartIcon from "/images/icons8-cart-24.png";
 import { fetchCartProducts } from "../../redux/Slices/cartSlice";
+import logo from "/images/logo.png";
 
 const Banner = ({ pageContent }) => {
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.auth.user);
   const userId = user?.userid;
 
   const checkIsCartPageOrIsCheckoutPage = () => {

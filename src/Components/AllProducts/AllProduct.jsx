@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
-import styles from "./Allproducts.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../redux/Slices/productSlice";
-import Card from "../ProductCard/Card";
-import ListProduct from "../ListProduct/ListProduct";
-import CardSkeltan from "../LodingSkeletan/CardSkeletan/CardSkeltan";
-import ListSkeletan from "../LodingSkeletan/ListSkeletan/ListSkeletan";
+import styles from "./Allproducts.module.css";
+
+import { CardSkeltan, ListSkeletan, ProductCard, ListProduct } from "../index";
 
 const AllProducts = ({ isListView }) => {
   const { products, status, error } = useSelector((state) => state.products);
@@ -32,7 +30,11 @@ const AllProducts = ({ isListView }) => {
   }
 
   if (status === "failed") {
-    return <div className={styles.container}>Error: {error}</div>;
+    return (
+      <div className={styles.container}>
+        <h3>NetWork Error ! Please Refresh the page</h3>
+      </div>
+    );
   }
 
   return (
@@ -42,7 +44,7 @@ const AllProducts = ({ isListView }) => {
           isListView && !isMobile ? (
             <ListProduct key={product._id} product={product} />
           ) : (
-            <Card key={product._id} product={product} />
+            <ProductCard key={product._id} product={product} />
           )
         )
       ) : (

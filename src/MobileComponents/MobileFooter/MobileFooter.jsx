@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import styles from "./MobileFooter.module.css";
-import homeIcon from "../../images/icons8-home-50.png";
-import cartIcon from "../../images/cartIcon.png";
-import userIcon from "../../images/icons8-user-50.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/Slices/authSlice";
+
+import styles from "./MobileFooter.module.css";
+import homeIcon from "/images/icons8-home-50.png";
+import cartIcon from "/images/cartIcon.png";
+import userIcon from "/images/icons8-user-50.png";
 
 import Swal from "sweetalert2";
 

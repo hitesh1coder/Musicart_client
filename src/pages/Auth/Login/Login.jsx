@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Login.module.css";
-import logo from "../../../images/logo.png";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../../redux/Slices/authSlice";
 import { Link, useNavigate } from "react-router-dom";
+
+import styles from "./Login.module.css";
+import logo from "/images/logo.png";
 import MobileAuthHeader from "../../../MobileComponents/MobileHeader/MobileAuthHeader";
 
 function Login() {
+  const { user, loading } = useSelector((state) => state.auth);
+  const { isMobile } = useSelector((state) => state.ui);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isError, setIsError] = useState(false);
-  const { user, loading } = useSelector((state) => state.auth);
-  const { isMobile } = useSelector((state) => state.ui);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

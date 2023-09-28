@@ -1,11 +1,12 @@
 import React from "react";
-import styles from "./Card.module.css";
-import cartIcon from "../../images/icons8-add-shopping-cart-24.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/Slices/cartSlice";
 
-const Card = ({ product }) => {
+import { addToCart } from "../../redux/Slices/cartSlice";
+import styles from "./Card.module.css";
+import cartIcon from "/images/icons8-add-shopping-cart-24.png";
+
+const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const userId = user?.userid;
@@ -44,4 +45,4 @@ const Card = ({ product }) => {
   );
 };
 
-export default Card;
+export default ProductCard;

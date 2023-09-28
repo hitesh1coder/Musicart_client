@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import styles from "./Success.module.css";
-import logo from "../../images/logo.png";
-import success from "../../images/confetti 1.png";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import styles from "./Success.module.css";
+import success from "/images/confetti 1.png";
 import { clearCart } from "../../redux/Slices/cartSlice";
 import MobileAuthHeader from "../../MobileComponents/MobileHeader/MobileAuthHeader";
 import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
+import logo from "/images/logo.png";
 
 const Success = () => {
   const { user } = useSelector((state) => state.auth);

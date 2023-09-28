@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./Header.module.css";
-import phoneIcon from "../../images/icons8-phone-80.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/Slices/authSlice";
-
 import Swal from "sweetalert2";
+
+import phoneIcon from "/images/icons8-phone-80.png";
 
 const Header = () => {
   const user = useSelector((state) => state.auth.user);

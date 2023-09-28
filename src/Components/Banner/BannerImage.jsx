@@ -1,12 +1,16 @@
 import React from "react";
 import styles from "./Banner.module.css";
-import banner from "../../images/Rectangle 3.png";
-import girl_img from "../../images/image_5-removebg-preview 1.png";
+import bannerbackgroundImg from "/images/Rectangle 3.png";
+import girl_img from "/images/image_5-removebg-preview 1.png";
 
 const BannerImage = () => {
   return (
     <div className={styles.banner_Image_container}>
-      <img className={styles.background_img} src={banner} alt="banner" />
+      <img
+        className={styles.background_img}
+        src={bannerbackgroundImg}
+        alt="bannerbackgroundImg"
+      />
       <p className={styles.banner_text}>
         Grab upto 50% off on Selected headphones
       </p>

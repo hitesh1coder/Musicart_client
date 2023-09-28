@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styles from "./checkout.module.css";
-import backIcon from "../../images/icons8-back-50.png";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchCartProducts, getCartTotal } from "../../redux/Slices/cartSlice";
 import Swal from "sweetalert2";
-import Header from "../../Components/Header/Header";
-import Banner from "../../Components/Banner/Banner";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchCartProducts, getCartTotal } from "../../redux/Slices/cartSlice";
+import { Header, Banner } from "../../Components/index";
 import MobileAuthHeader from "../../MobileComponents/MobileHeader/MobileAuthHeader";
 import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
+import backIcon from "/images/icons8-back-50.png";
 
 function Checkout() {
   const { cartItems, totalAmount, totalCount } = useSelector(

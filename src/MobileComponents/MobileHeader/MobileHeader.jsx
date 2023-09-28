@@ -1,17 +1,17 @@
 import React from "react";
 import styles from "./MobileHeader.module.css";
-import SeachBar from "../../Components/SeachBar/SearchBar";
+import { SearchBar } from "../../Components/index";
 
-const SeachBarHeader = () => {
+const MobileHeader = () => {
   return (
     <>
       <div className={styles.header_container}>
         <div className={styles.logo_div}>
-          <SeachBar />
+          <SearchBar />
         </div>
       </div>
     </>
   );
 };
 
-export default SeachBarHeader;
+export default MobileHeader;

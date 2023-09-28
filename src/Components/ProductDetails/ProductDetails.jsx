@@ -1,34 +1,37 @@
 import React, { useEffect, useState } from "react";
-import styles from "./ProductDetails.module.css";
-import backIcon from "../../images/icons8-back-50.png";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchSingleProduct,
-  resetSingleProduct,
-} from "../../redux/Slices/singleProductSlice";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Banner from "../Banner/Banner";
-import Header from "../Header/Header";
-import SearchBarHeader from "../../MobileComponents/MobileHeader/SeachBarHeader";
-import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
-import { addToCart } from "../../redux/Slices/cartSlice";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addToCart } from "../../redux/Slices/cartSlice";
+import {
+  fetchSingleProduct,
+  resetSingleProduct,
+} from "../../redux/Slices/singleProductSlice";
+
+import styles from "./ProductDetails.module.css";
+import { Header, Banner } from "../index";
+import SearchBarHeader from "../../MobileComponents/MobileHeader/MobileHeader";
+import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
+
+import backIcon from "/images/icons8-back-50.png";
 import DetailPageSkeletan from "../LodingSkeletan/ProductDetailSkeletan/DetailPageSkeletan";
 
-function ProductDetail() {
-  const { productId } = useParams();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+function ProductDetails() {
   const { isMobile } = useSelector((state) => state.ui);
   const { user } = useSelector((state) => state.auth);
   const userId = user?.userid;
   const { product, status, error } = useSelector(
     (state) => state.singleProduct
   );
+  const [displayImageIndex, setDisplayImageIndex] = useState(0);
+
+  const { productId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const slideSettings = {
     arrows: false,
@@ -45,10 +48,14 @@ function ProductDetail() {
       dispatch(resetSingleProduct());
     };
   }, [dispatch, productId]);
-  const [displayImageIndex, setDisplayImageIndex] = useState(0);
 
   if (status === "loading") return <DetailPageSkeletan />;
-  if (status === "failed") return <div>Error: {error}</div>;
+  if (status === "failed")
+    return (
+      <div>
+        <h3>NetWork Error ! Please Refresh the page</h3>
+      </div>
+    );
 
   const handleAddToCart = async () => {
     if (user) {
@@ -159,7 +166,7 @@ function ProductDetail() {
                     <div key={index} className={styles.other_images_container}>
                       <img
                         key={index}
-                        onClick={() => setDisplayImageIndex(index)}
+                        onMouseEnter={() => setDisplayImageIndex(index)}
                         src={image}
                         alt={product.title}
                       />
@@ -187,4 +194,4 @@ function ProductDetail() {
   );
 }
 
-export default ProductDetail;
+export default ProductDetails;

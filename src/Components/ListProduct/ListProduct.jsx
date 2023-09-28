@@ -1,13 +1,14 @@
 import React from "react";
-import styles from "./ListProduct.module.css";
-
-import cartIcon from "../../images/icons8-add-shopping-cart-24.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import { addToCart } from "../../redux/Slices/cartSlice";
+import styles from "./ListProduct.module.css";
+import cartIcon from "/images/icons8-add-shopping-cart-24.png";
 
 const ListProduct = ({ product }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
   const userId = user?.userid;
 
@@ -39,10 +40,13 @@ const ListProduct = ({ product }) => {
         <span>{product?.color}</span>
         <span> | </span>
         <span>{product?.type}</span>
-        <Link to={`/${product._id}`}>
-          {" "}
-          <button className={styles.detail_btn}>Details</button>
-        </Link>
+
+        <button
+          onClick={() => navigate(`/${product._id}`)}
+          className={styles.detail_btn}
+        >
+          Details
+        </button>
       </div>
     </div>
   );

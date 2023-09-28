@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import styles from "./SignUp.module.css";
-import logo from "../../../images/logo.png";
-import { useSelector, useDispatch } from "react-redux";
-import { signupUser } from "../../../redux/Slices/authSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+import styles from "./SignUp.module.css";
+import { signupUser } from "../../../redux/Slices/authSlice";
 import MobileAuthHeader from "../../../MobileComponents/MobileHeader/MobileAuthHeader";
+import logo from "/images/logo.png";
 
 function Signup() {
   const [name, setName] = useState("");

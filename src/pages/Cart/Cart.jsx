@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Cart.module.css";
-import backIcon from "../../images/icons8-back-50.png";
-import bagIcon from "../../images/icons8-bag-64.png";
 import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./Cart.module.css";
+
 import {
   fetchCartProducts,
   getCartTotal,
   updateCartQuantity,
 } from "../../redux/Slices/cartSlice";
-import Header from "../../Components/Header/Header";
-import Banner from "../../Components/Banner/Banner";
-import { Link, useNavigate } from "react-router-dom";
+import { Header, Banner } from "../../Components/index";
 import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
-import SeachBarHeader from "../../MobileComponents/MobileHeader/SeachBarHeader";
+import SeachBarHeader from "../../MobileComponents/MobileHeader/MobileHeader";
+import backIcon from "/images/icons8-back-50.png";
+import bagIcon from "/images/icons8-bag-64.png";
 
-function Cart() {
+const Cart = () => {
   const { cartItems, totalAmount, totalCount } = useSelector(
     (state) => state.cart
   );
@@ -161,6 +161,6 @@ function Cart() {
       {isMobile && <MobileFooter />}
     </>
   );
-}
+};
 
 export default Cart;
