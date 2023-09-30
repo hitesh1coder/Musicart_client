@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Cart.module.css";
+import Swal from "sweetalert2";
 
 import {
   fetchCartProducts,
   getCartTotal,
+  removeFromCart,
   updateCartQuantity,
 } from "../../redux/Slices/cartSlice";
 import { Header, Banner } from "../../Components/index";
@@ -13,6 +15,7 @@ import MobileFooter from "../../MobileComponents/MobileFooter/MobileFooter";
 import SeachBarHeader from "../../MobileComponents/MobileHeader/MobileHeader";
 import backIcon from "/images/icons8-back-50.png";
 import bagIcon from "/images/icons8-bag-64.png";
+import deleteIcon from "/images/icons8-delete-30.png";
 
 const Cart = () => {
   const { cartItems, totalAmount, totalCount } = useSelector(
@@ -29,6 +32,22 @@ const Cart = () => {
     dispatch(getCartTotal());
     let quantity = parseInt(e.target.value);
     dispatch(updateCartQuantity({ quantity, productId, userId }));
+  };
+
+  const handleRemoveFromCart = (productId) => {
+    Swal.fire({
+      title: "Are you sure you want to remove this item?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#2fca08",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, remove it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(getCartTotal());
+        dispatch(removeFromCart({ productId, userId }));
+      }
+    });
   };
 
   useEffect(() => {
@@ -80,6 +99,7 @@ const Cart = () => {
                       <p>Color : Black</p>
                       <p>In Stock</p>
                     </div>
+
                     {!isMobile && (
                       <div className={styles.price}>
                         <h3>Price</h3>
@@ -110,6 +130,12 @@ const Cart = () => {
                       <p> ₹ {item?.price * item?.quantity}</p>
                     </div>
                   </div>
+                  <img
+                    className={styles.delete_icon}
+                    onClick={() => handleRemoveFromCart(item?._id)}
+                    src={deleteIcon}
+                    alt="deleteIcon"
+                  />
                 </div>
               ))}
               {isMobile && <hr />}

@@ -30,7 +30,9 @@ const Banner = ({ pageContent }) => {
         <div className={styles.logo_container}>
           <img src={logo} alt="logo" />
           <h2>Musicart</h2>
-          <p> Home / {pageContent}</p>
+          <p>
+            <Link to="/">Home</Link> / {pageContent}
+          </p>
         </div>
         <div>
           {user && checkIsCartPageOrIsCheckoutPage() && (

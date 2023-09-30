@@ -18,7 +18,7 @@ export const addToCart = createAsyncThunk(
         `${import.meta.env.VITE_SERVER_HOST}/cart/addtocart`,
         { userId, product, quantity }
       );
-      console.log(response);
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -35,10 +35,8 @@ export const fetchCartProducts = createAsyncThunk(
       );
 
       return response.data;
-    } catch (err) {
-      return rejectWithValue(
-        err.response?.data || { error: "Unable to fetch cart items" }
-      );
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -51,10 +49,24 @@ export const updateCartQuantity = createAsyncThunk(
         { userId, quantity, productId }
       );
       return response.data;
-    } catch (err) {
-      return rejectWithValue(
-        err.response?.data || { error: "Unable to update cart quantity" }
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const removeFromCart = createAsyncThunk(
+  "cart/removeFromCart",
+  async ({ userId, productId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_SERVER_HOST}/cart/${userId}/${productId}`
       );
+
+      return response.data.cart;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -68,9 +80,7 @@ export const clearCart = createAsyncThunk(
       );
       return response.data;
     } catch (err) {
-      return rejectWithValue(
-        err.response?.data || { error: "Unable to clear cart" }
-      );
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -128,6 +138,19 @@ const cartSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
         toast.error(`Failed to updated the Quantity`);
+      })
+      .addCase(removeFromCart.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(removeFromCart.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.cartItems = action.payload;
+        toast.success(`This Item has Removed from cart`);
+      })
+      .addCase(removeFromCart.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+        toast.error(`Failed to Remove from cart`);
       })
       .addCase(clearCart.pending, (state) => {
         state.status = "loading";

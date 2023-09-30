@@ -49,8 +49,8 @@ const MobileFooter = () => {
 
       <div
         onClick={() => {
-          gotToCart();
           handleMenulick("cart");
+          gotToCart();
         }}
         className={`${styles.btn} ${
           activeMenu === "cart" ? `${styles.active}` : ""

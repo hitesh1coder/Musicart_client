@@ -83,7 +83,7 @@
   gap: 1rem;
 }
 .other_images_container {
-  border: 3px solid #2e0052;
+  border: 1px solid #2e0052;
   width: 30%;
   height: 90%;
   border-radius: 1rem;
@@ -91,6 +91,9 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+.other_images_container:hover {
+  border: 3px solid #2e0052;
 }
 .other_images_container img {
   width: 80%;

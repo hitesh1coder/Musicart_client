@@ -11,6 +11,9 @@
   justify-content: center;
   align-items: center;
 }
+.filters_options {
+  margin-top: 0.5rem;
+}
 .view_options img {
   width: 3rem;
   padding: 0.5rem;

@@ -24,7 +24,7 @@ const Header = () => {
       </div>
       {user ? (
         <div className={styles.btns}>
-          <p>Welcome {user.name}</p>
+          <h2>Welcome {user.name}</h2>
 
           <p
             className={styles.btn}
