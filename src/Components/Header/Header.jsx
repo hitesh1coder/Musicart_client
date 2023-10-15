@@ -6,6 +6,7 @@ import { logoutUser } from "../../redux/Slices/authSlice";
 import Swal from "sweetalert2";
 
 import phoneIcon from "/images/icons8-phone-80.png";
+import musicartLogo from "/images/musicartLogo.png";
 
 const Header = () => {
   const user = useSelector((state) => state.auth.user);
@@ -13,9 +14,8 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <header className={styles.container}>
-      <div className={styles.contact}>
-        <img src={phoneIcon} alt="phoneIcon" />
-        912121131313
+      <div className={styles.logo}>
+        <img src={musicartLogo} alt="phoneIcon" />
       </div>
       <div className={styles.btns}>
         <p>Get 50% off on selected items</p>

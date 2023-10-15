@@ -1,21 +1,35 @@
 import React from "react";
 import styles from "./Banner.module.css";
-import bannerbackgroundImg from "/images/Rectangle 3.png";
-import girl_img from "/images/image_5-removebg-preview 1.png";
+
+import banne1 from "/images/banner1.jpg";
+import banne2 from "/images/banner2.jpg";
+import banne3 from "/images/banner3.jpg";
+import banne4 from "/images/banner4.png";
+import banne5 from "/images/banner5.jpg";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const BannerImage = () => {
+  const images = [banne1, banne2, banne3, banne4, banne5];
+  const slideSettings = {
+    arrows: false,
+    speed: 300,
+    autoplay: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    centerPadding: "0px",
+  };
   return (
     <div className={styles.banner_Image_container}>
-      <img
-        className={styles.background_img}
-        src={bannerbackgroundImg}
-        alt="bannerbackgroundImg"
-      />
-      <p className={styles.banner_text}>
-        Grab upto 50% off on Selected headphones
-      </p>
-      <button className={styles.banner_btn}>Buy Now</button>
-      <img className={styles.girl_img} src={girl_img} alt="girl_img" />
+      <Slider {...slideSettings}>
+        {images.map((image, index) => (
+          <div className={styles.product_img} key={index}>
+            <img src={image} alt="banner" />
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Success.module.css";
 import success from "/images/confetti 1.png";
@@ -13,10 +13,14 @@ const Success = () => {
   const { user } = useSelector((state) => state.auth);
   const userId = user?.userid;
   const { isMobile } = useSelector((state) => state.ui);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(clearCart(userId));
+    setTimeout(() => {
+      navigate("/");
+    }, 5000);
   }, [dispatch]);
   return (
     <div className={styles.main_container}>
@@ -32,9 +36,11 @@ const Success = () => {
         <img src={success} alt="SuccessLogo" />
         <h2>Order is placed successfully!</h2>
         <p>You will be receiving a confirmation email with order details</p>
-        <Link to="/">
-          <button className={styles.back_btn}>Go Back to Homepage</button>
-        </Link>
+
+        <button className={styles.back_btn}>
+          Thanks for Shopping with Us !!
+        </button>
+
         {isMobile && <MobileFooter />}
       </div>
     </div>

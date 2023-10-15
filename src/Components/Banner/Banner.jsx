@@ -9,6 +9,8 @@ import logo from "/images/logo.png";
 
 const Banner = ({ pageContent }) => {
   const { user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
+
   const dispatch = useDispatch();
   const userId = user?.userid;
 
@@ -36,12 +38,15 @@ const Banner = ({ pageContent }) => {
         </div>
         <div>
           {user && checkIsCartPageOrIsCheckoutPage() && (
-            <Link to="/cart">
-              <button className={styles.viewCart_btn}>
-                <img src={cartIcon} alt="cartIcon" />
-                View Cart
-              </button>
-            </Link>
+            <>
+              <p className={styles.cart_count}>{cartItems.length}</p>
+              <Link to="/cart">
+                <button className={styles.viewCart_btn}>
+                  <img src={cartIcon} alt="cartIcon" />
+                  View Cart
+                </button>
+              </Link>
+            </>
           )}
         </div>
       </div>

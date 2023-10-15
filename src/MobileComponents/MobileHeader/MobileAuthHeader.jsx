@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./MobileHeader.module.css";
-import logo from "/images/logo.png";
+import logo from "/images/musicartLogo.png";
 
 const MobileAuthHeader = () => {
   return (
@@ -8,7 +8,6 @@ const MobileAuthHeader = () => {
       <div className={styles.header_container}>
         <div className={styles.logo_div}>
           <img src={logo} alt="logo" />
-          <h3>Musicart</h3>
         </div>
       </div>
     </>

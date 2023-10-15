@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addToCart } from "../../redux/Slices/cartSlice";
+import { addToCart, getCartTotal } from "../../redux/Slices/cartSlice";
 import styles from "./Card.module.css";
 import cartIcon from "/images/icons8-add-shopping-cart-24.png";
 

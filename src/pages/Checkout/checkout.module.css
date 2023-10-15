@@ -12,10 +12,12 @@
 }
 .heading {
   text-align: center;
-  margin-bottom: 0.7rem;
+  padding-bottom: 0.7rem;
   font-weight: bolder;
+  background: #f1f1f1;
 }
 .main_container {
+  background: #f1f1f1;
   font-weight: bolder;
   width: 100vw;
   display: flex;
@@ -26,6 +28,11 @@
   width: 72%;
   display: flex;
   flex-direction: column;
+  background: #fff;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0 0.3rem;
 }
 .delivery_detail,
 .payment_details,
@@ -75,7 +82,7 @@
 }
 .image_container img {
   width: 80%;
-  height: 13rem;
+  height: 10rem;
 }
 .product_details_container {
   line-height: 1.5rem;
@@ -99,7 +106,9 @@
 }
 .order_Price_details {
   border: 2px solid #e1e1e1;
-  height: 45vh;
+  background: #fff;
+  border-radius: 0.5rem;
+  max-height: 55vh;
   width: 24%;
   padding: 0.4rem 1rem;
   display: flex;

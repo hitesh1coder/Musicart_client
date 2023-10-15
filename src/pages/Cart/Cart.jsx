@@ -146,7 +146,7 @@ const Cart = () => {
               {isMobile && (
                 <Link to="/checkout">
                   <button className={styles.place_order_btn}>
-                    Place Order
+                    Contitue to checkout
                   </button>
                 </Link>
               )}
@@ -173,7 +173,7 @@ const Cart = () => {
                   </div>
                   <Link to="/checkout">
                     <button className={styles.place_order_btn}>
-                      Place Order
+                      Contitue to checkout
                     </button>
                   </Link>
                 </div>

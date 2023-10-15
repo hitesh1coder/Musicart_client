@@ -5,9 +5,11 @@ import styles from "./SearchBar.module.css";
 import { searchProducts } from "../../redux/Slices/productSlice";
 import debounce from "../../utils/debounce";
 import searchIcon from "/images/icons8-search-30.png";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const debouncedSearch = debounce((newSearch) => {
     dispatch(searchProducts(newSearch));
@@ -16,6 +18,7 @@ const SearchBar = () => {
   const handleSearch = (e) => {
     let search = e.target.value;
     debouncedSearch(search);
+    navigate("/");
   };
   return (
     <div className={styles.container}>

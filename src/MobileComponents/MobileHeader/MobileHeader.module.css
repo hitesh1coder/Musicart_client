@@ -1,13 +1,20 @@
 .header_container {
   width: 100vw;
-  height: 8vh;
-  padding: 0 1rem;
+  height: 7vh;
+  padding: 0.3rem;
   background-color: #2e0052;
   color: #fff;
   position: fixed;
   top: 0;
   z-index: 999;
-  /* margin-bottom: 1rem; */
+}
+.header_div {
+  display: flex;
+  margin-top: 0.2rem;
+}
+.logo_img {
+  width: 10rem;
+  margin-right: 0.2rem;
 }
 .logo_div {
   display: flex;
@@ -18,5 +25,5 @@
   font-size: 1rem;
 }
 .logo_div img {
-  width: 2.5rem;
+  width: 9rem;
 }

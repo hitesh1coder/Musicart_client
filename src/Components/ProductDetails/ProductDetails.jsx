@@ -35,7 +35,8 @@ function ProductDetails() {
 
   const slideSettings = {
     arrows: false,
-    speed: 500,
+    speed: 300,
+    autoplay: true,
     slidesToShow: 1,
     slidesToScroll: 1,
     adaptiveHeight: true,

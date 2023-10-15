@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./checkout.module.css";
+import { loadStripe } from "@stripe/stripe-js";
+
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -29,20 +31,52 @@ function Checkout() {
     dispatch(fetchCartProducts(userId));
   }, [dispatch]);
 
+  const makePayementHandler = async () => {
+    const stripe = await loadStripe(
+      `${import.meta.env.VITE_SERVER_STRIPE_PUBLICABLE_KEY}`
+    );
+    const body = {
+      cartItems,
+      totalAmount,
+      cartTotalAmount,
+    };
+    const responce = await fetch(
+      `${import.meta.env.VITE_SERVER_HOST}/cart/create-checkout-sesion`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    const session = await responce.json();
+
+    const result = await stripe.redirectToCheckout({ sessionId: session.id });
+    if (result.error) {
+      console.log(result.error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+      });
+    }
+  };
+
   return (
     <>
       <div>
         {isMobile ? <MobileAuthHeader /> : <Header />}
-        {!isMobile && <Banner pageContent="ViewCart" />}
+        {!isMobile && <Banner pageContent="Checkout" />}
         {isMobile ? (
           <img
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/cart")}
             className={styles.back_btn_mobile}
             src={backIcon}
             alt="backIcon"
           />
         ) : (
-          <button onClick={() => navigate(-1)} className={styles.back_btn}>
+          <button onClick={() => navigate("/cart")} className={styles.back_btn}>
             Back to products
           </button>
         )}
@@ -54,7 +88,7 @@ function Checkout() {
               <div className={styles.delivery_detail}>
                 <h2>1. Delivery address</h2>
                 <div className={styles.address}>
-                  <p>Akash Patel</p>
+                  <p>{user.name}</p>
                   <p>104</p>
                   <p>kk hh nagar lucknow</p>
                   <p>Uttar pradesh 226025</p>
@@ -101,7 +135,7 @@ function Checkout() {
                       confirmButtonText: "Yes, Go Ahead!",
                     }).then((result) => {
                       if (result.isConfirmed) {
-                        navigate("/order-success");
+                        makePayementHandler();
                       }
                     });
                   }}
@@ -134,7 +168,7 @@ function Checkout() {
                       confirmButtonText: "Yes, Go Ahead!",
                     }).then((result) => {
                       if (result.isConfirmed) {
-                        navigate("/order-success");
+                        makePayementHandler();
                       }
                     });
                   }}
