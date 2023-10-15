@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/Slices/authSlice";
 import Swal from "sweetalert2";
 
-import phoneIcon from "/images/icons8-phone-80.png";
 import musicartLogo from "/images/musicartLogo.png";
 
 const Header = () => {
@@ -15,7 +14,7 @@ const Header = () => {
   return (
     <header className={styles.container}>
       <div className={styles.logo}>
-        <img src={musicartLogo} alt="phoneIcon" />
+        <img src={musicartLogo} alt="musicartLogo" />
       </div>
       <div className={styles.btns}>
         <p>Get 50% off on selected items</p>
