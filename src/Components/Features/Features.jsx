@@ -23,7 +23,7 @@ const Features = ({ isListView, setIsListView }) => {
   const [sort, setSort] = useState({ sortBy: "title", order: "asc" });
   const debouncedFunction = debounce((data) => {
     dispatch(filterProducts(data));
-  }, 200);
+  }, 1000);
 
   const handleFilterChange = (event) => {
     const { name, value } = event.target;

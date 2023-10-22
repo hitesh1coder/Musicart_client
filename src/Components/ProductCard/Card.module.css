@@ -7,6 +7,7 @@
   transition: transform 0.5s;
   margin: 1rem;
   background: #fff;
+  cursor: pointer;
 }
 
 .productCard:hover {
