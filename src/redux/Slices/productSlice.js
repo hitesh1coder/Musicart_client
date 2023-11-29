@@ -12,23 +12,6 @@ export const fetchProducts = createAsyncThunk(
   }
 );
 
-export const searchProducts = createAsyncThunk(
-  "products/search",
-  async (query, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(
-        `${
-          import.meta.env.VITE_SERVER_HOST
-        }/products/api/search/?search=${query}`
-      );
-
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response);
-    }
-  }
-);
-
 // Async thunk for filtering
 export const filterProducts = createAsyncThunk(
   "filter/filterProducts",
@@ -36,7 +19,7 @@ export const filterProducts = createAsyncThunk(
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_SERVER_HOST}/products/api/filter`,
-        { params: filters }
+        { params: [filters["0"], filters["1"]] }
       );
 
       return response.data;
@@ -66,17 +49,6 @@ const productsSlice = createSlice({
         state.products = action.payload;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      })
-      .addCase(searchProducts.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(searchProducts.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.products = action.payload;
-      })
-      .addCase(searchProducts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })
