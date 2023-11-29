@@ -4,7 +4,7 @@ import Banner from "./Banner/Banner";
 import Features from "./Features/Features";
 import AllProducts from "./AllProducts/AllProduct";
 import ListProduct from "./ListProduct/ListProduct";
-import BannerImage from "./Banner/BannerImage";
+import BannerSlider from "./Banner/BannerSlider";
 import CardSkeltan from "./LodingSkeletan/CardSkeletan/CardSkeltan";
 import ListSkeletan from "./LodingSkeletan/ListSkeletan/ListSkeletan";
 import ProductDetails from "./ProductDetails/ProductDetails";
@@ -19,7 +19,7 @@ export {
   Features,
   AllProducts,
   ListProduct,
-  BannerImage,
+  BannerSlider,
   CardSkeltan,
   ListSkeletan,
   ProductDetails,
