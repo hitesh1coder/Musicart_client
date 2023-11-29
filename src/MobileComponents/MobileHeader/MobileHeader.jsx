@@ -9,7 +9,7 @@ const MobileHeader = () => {
       <div className={styles.header_container}>
         <div className={styles.header_div}>
           <img className={styles.logo_img} src={logo} alt="logo" />
-          <SearchBar />
+          {/* <SearchBar /> */}
         </div>
       </div>
     </>

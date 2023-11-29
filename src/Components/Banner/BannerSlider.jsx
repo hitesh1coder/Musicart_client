@@ -10,7 +10,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const BannerImage = () => {
+const BannerSlider = () => {
   const images = [banne1, banne2, banne3, banne4, banne5];
   const slideSettings = {
     arrows: false,
@@ -34,4 +34,4 @@ const BannerImage = () => {
   );
 };
 
-export default BannerImage;
+export default BannerSlider;

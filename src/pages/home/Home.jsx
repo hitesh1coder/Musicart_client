@@ -4,10 +4,9 @@ import styles from "./Home.module.css";
 
 import {
   Banner,
-  SearchBar,
   Features,
   AllProducts,
-  BannerImage,
+  BannerSlider,
   Header,
 } from "../../Components/index";
 
@@ -21,8 +20,7 @@ const Home = () => {
     <div className={styles.container}>
       {isMobile ? <MobileHeader /> : <Header />}
       {!isMobile && <Banner pageContent="" />}
-      <BannerImage />
-      {!isMobile && <SearchBar />}
+      <BannerSlider />
       <Features isListView={isListView} setIsListView={setIsListView} />
       <AllProducts isListView={isListView} />
       {isMobile && <MobileFooter />}

@@ -25,11 +25,11 @@
     padding: 0;
   }
   .search_input {
-    width: 100%;
+    width: 97%;
     border-radius: 5px;
   }
   .search_icon {
-    width: 0.8rem;
+    width: 1.5rem;
     left: 0.5rem;
   }
 }

@@ -5,6 +5,7 @@
   gap: 1rem;
   padding: 1rem;
   width: 100vw;
+  min-height: 8rem;
 }
 .container h3 {
   width: 100%;

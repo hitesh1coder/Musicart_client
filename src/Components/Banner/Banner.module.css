@@ -70,7 +70,10 @@
 /* Responcive Code  */
 @media only screen and (max-width: 600px) {
   .banner_Image_container {
-    margin-top: 6rem;
+    margin-top: 4rem;
     margin-bottom: 1rem;
+  }
+  .product_img {
+    height: 10rem;
   }
 }

@@ -11,9 +11,12 @@ import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
 import Success from "./pages/OrderSucces/Success";
 
-import { Footer, ProductDetails } from "./Components/index";
+import { Footer, Header, ProductDetails } from "./Components/index";
 
 import "react-toastify/dist/ReactToastify.css";
+import AdminElement from "./Admin/AdminElement";
+import DashBoard from "./Admin/Pages/Dashboard/DashBoard";
+import Products from "./Admin/Components/AllProducts/Products";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -39,6 +42,15 @@ const App = () => {
       />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route
+          path="/admin"
+          element={
+            <AdminElement>
+              <DashBoard />
+            </AdminElement>
+          }
+        />
+
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/:productId" element={<ProductDetails />} />

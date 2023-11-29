@@ -36,7 +36,7 @@ export const filterProducts = createAsyncThunk(
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_SERVER_HOST}/products/api/filter`,
-        { params: filters }
+        { params: [filters["0"], filters["1"]] }
       );
 
       return response.data;
@@ -46,21 +46,6 @@ export const filterProducts = createAsyncThunk(
   }
 );
 
-export const sortProducts = createAsyncThunk(
-  "sort/sortProducts",
-  async (sortby, { rejectWithValue }) => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_SERVER_HOST}/products/api/sort`,
-        { params: sortby }
-      );
-
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.response);
-    }
-  }
-);
 const initialState = {
   products: [],
   status: "idle",
@@ -103,17 +88,6 @@ const productsSlice = createSlice({
         state.products = action.payload;
       })
       .addCase(filterProducts.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      })
-      .addCase(sortProducts.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(sortProducts.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.products = action.payload;
-      })
-      .addCase(sortProducts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
