@@ -19,7 +19,7 @@ export const filterProducts = createAsyncThunk(
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_SERVER_HOST}/products/api/filter`,
-        { params: [filters["0"], filters["1"]] }
+        { params: filters["0"] }
       );
 
       return response.data;

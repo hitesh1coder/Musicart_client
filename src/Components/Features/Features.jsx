@@ -44,7 +44,7 @@ const Features = ({ isListView, setIsListView }) => {
     const newConfig = sortOptions[value] || { sortBy: "title", order: "asc" };
 
     setSort(value);
-    debouncedFunction(updatedFilters, newConfig);
+    debouncedFunction({ ...updatedFilters, ...newConfig });
   };
 
   return (
