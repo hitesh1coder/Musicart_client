@@ -10,7 +10,8 @@
 }
 .header_div {
   display: flex;
-  margin-top: 0.2rem;
+  justify-content: space-between;
+  align-items: center;
 }
 .logo_img {
   width: 10rem;
@@ -26,4 +27,8 @@
 }
 .logo_div img {
   width: 9rem;
+}
+.user_info {
+  display: flex;
+  align-items: center;
 }

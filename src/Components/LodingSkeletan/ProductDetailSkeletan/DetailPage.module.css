@@ -30,6 +30,17 @@
     padding: 0;
   }
   .product_container {
-    height: 90%;
+    height: 95%;
+    flex-direction: column;
+  }
+  .image_div {
+    width: 90%;
+    height: 100%;
+  }
+  .details_div {
+    width: 90%;
+    height: 100%;
+    padding: 1rem;
+    gap: 0;
   }
 }
