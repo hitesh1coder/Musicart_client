@@ -21,7 +21,6 @@ export const loginUser = createAsyncThunk(
         `${import.meta.env.VITE_SERVER_HOST}/auth/login`,
         credentials
       );
-
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response);
@@ -66,7 +65,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload;
         localStorage.setItem("user", JSON.stringify(action.payload));
-        toast.success("Logged in successfully");
+        toast.success(`${action.payload?.message}`);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;

@@ -23,6 +23,8 @@
   border: 2px solid #d9d9d9;
   border-radius: 0.4rem;
   padding: 0 1.4rem;
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.6) inset,
+    2px 2px 10px rgba(255, 255, 255, 0.9);
 }
 .signup_header {
   display: flex;

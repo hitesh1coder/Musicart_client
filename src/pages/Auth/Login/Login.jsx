@@ -13,6 +13,8 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [usertype, setUsertype] = useState("User");
+  const [secretKey, setSecretKey] = useState("");
   const [isError, setIsError] = useState(false);
 
   const dispatch = useDispatch();
@@ -20,17 +22,22 @@ function Login() {
 
   useEffect(() => {
     if (user) {
-      navigate(-1);
+      navigate("/");
     }
   }, [user]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!email || !password) {
+    if (usertype === "Admin" && secretKey.length < 1) {
+      e.preventDefault();
       setIsError(true);
     } else {
-      setIsError(false);
-      dispatch(loginUser({ email, password }));
+      e.preventDefault();
+      if (!email || !password) {
+        setIsError(true);
+      } else {
+        setIsError(false);
+        dispatch(loginUser({ email, password, usertype, secretKey }));
+      }
     }
   };
 
@@ -50,6 +57,32 @@ function Login() {
           <h2>Sign In</h2>
           {isMobile && <span>Already a customer?</span>}
         </div>
+        <div className={styles.radio_btn}>
+          <input
+            type="radio"
+            name="usertype"
+            value="User"
+            onChange={(e) => setUsertype(e.target.value)}
+          />
+          <label>Login as User</label>
+          <input
+            type="radio"
+            name="usertype"
+            value="Admin"
+            onChange={(e) => setUsertype(e.target.value)}
+          />
+          <label>Login as Admin</label>
+        </div>
+        {usertype === "Admin" && (
+          <div className={styles.input_field}>
+            <label>Enter Admin Secret Key</label>
+            <input
+              type="password"
+              value={secretKey}
+              onChange={(e) => setSecretKey(e.target.value)}
+            />
+          </div>
+        )}
         <div className={styles.input_field}>
           <label>Enter your email or mobile number</label>
           <input

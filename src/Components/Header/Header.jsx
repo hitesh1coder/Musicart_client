@@ -6,11 +6,15 @@ import { logoutUser } from "../../redux/Slices/authSlice";
 import Swal from "sweetalert2";
 
 import musicartLogo from "/images/musicartLogo.png";
+import usersIcon from "/images/icons8-group-32.png";
 
 const Header = () => {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const isAdmin = user?.isAdmin;
+  console.log(user);
   return (
     <header className={styles.container}>
       <div className={styles.logo}>
@@ -23,8 +27,22 @@ const Header = () => {
       </div>
       {user ? (
         <div className={styles.btns}>
-          <h2>Welcome {user.name}</h2>
-
+          <>
+            <div className={styles.user_info}>
+              <img src={usersIcon} alt="user" />
+              <h2> {user?.name.toUpperCase()}</h2>
+            </div>
+            {isAdmin && (
+              <>
+                <span style={{ color: "red", padding: "0 0.3rem" }}>
+                  As Admin
+                </span>
+                <Link to="/admin">
+                  <button className={styles.dashboard_btn}>Dashboard</button>
+                </Link>
+              </>
+            )}
+          </>
           <p
             className={styles.btn}
             onClick={() => {

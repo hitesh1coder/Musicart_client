@@ -1,0 +1,31 @@
+.container {
+  width: 20vw;
+  height: 83vh;
+  background-color: #537ceb;
+}
+.container h1 {
+  text-align: center;
+  color: #fff;
+}
+.tabList {
+  display: flex;
+  flex-direction: column;
+  padding: 0.3rem;
+}
+.active {
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.5);
+  border: 2px solid #0d39b4;
+}
+.tab {
+  margin: 0.5rem -0.2rem;
+  padding: 0.7rem 0.5rem;
+  font-weight: bold;
+  background: #fff;
+  text-align: center;
+  border-radius: 1rem 0 0 1rem;
+  cursor: pointer;
+}
+.tab > span > img {
+  width: 1.5rem;
+  margin: 0 0.5rem;
+}

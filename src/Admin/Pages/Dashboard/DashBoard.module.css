@@ -1,0 +1,6 @@
+.container {
+  margin-top: 9vh;
+  min-height: 83vh;
+  width: 100%;
+  display: flex;
+}
